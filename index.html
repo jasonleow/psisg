@@ -41,8 +41,8 @@
 
 		#app {
 			text-align: center;
-			position: absolute;
 			height: 100%;
+			position: absolute;
 			top: 60%;
 			left: 50%;
 			-ms-transform: translate(-50%, -50%);
@@ -131,6 +131,15 @@
 			letter-spacing: 0.05em;
 			cursor: pointer;
 		}
+
+		@media only screen and (max-width: 600px) {
+			#app {
+				top: 60%;
+				left: 50%;
+				-ms-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+			}
+		}
 	</style>
 </head>
 
@@ -163,122 +172,122 @@
 				<p><strong>Health advisory: What you can do</strong></p>
 				<div class="info-text">{{ psiText }}</div>
 			</div>
-			<br />
 		</div>
+		<br />
 	</div>
-</body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.8/vue.min.js"></script>
-<script>
-	new Vue({
-		el: '#app',
-		data: {
-			psi: 0,
-			pm25: 0,
-			showPm25: true,
-			showPSI: false,
-			psiText: '',
-			pm25Text: ''
-		},
-		created() {
-			this.fetchAirQualityData();
-			// You can set an interval to update the data periodically
-			// setInterval(this.fetchAirQualityData, 60000); // Update every minute 
-		},
-		mounted() {
-			this.changePm25BackgroundColor()
-			// this.changePsiBackgroundColor()
-			this.getPsiAdvisory()
-			this.getPm25Advisory()
-		},
-		methods: {
-			fetchAirQualityData() {
-				// https://api.data.gov.sg/v1/environment/psi
-				fetch('https://api.data.gov.sg/v1/environment/psi')
-					.then(response => response.json())
-					.then(data => {
-						const items = data.items[0];
-						this.psi = items.readings.psi_twenty_four_hourly.national;
-						console.log("this.psi", this.psi)
-					})
-					.catch(error => console.error('Error fetching data:', error));
-				// https://api.data.gov.sg/v1/environment/pm25
-				fetch('https://api.data.gov.sg/v1/environment/pm25')
-					.then(response => response.json())
-					.then(data => {
-						const items = data.items[0];
-						this.pm25 = items.readings.pm25_one_hourly.central
-						console.log("this.pm25", this.pm25)
-					})
-					.catch(error => console.error('Error fetching data:', error));
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.8/vue.min.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				psi: 0,
+				pm25: 0,
+				showPm25: true,
+				showPSI: false,
+				psiText: '',
+				pm25Text: ''
 			},
-			getPsiBackgroundColor(value) {
-				if (value <= 50) return 'green';
-				else if (value <= 100) return 'blue';
-				else if (value <= 200) return 'yellow';
-				else if (value <= 300) return 'orange';
-				else return 'red';
+			created() {
+				this.fetchAirQualityData();
+				// You can set an interval to update the data periodically
+				// setInterval(this.fetchAirQualityData, 60000); // Update every minute 
 			},
-			getPm25BackgroundColor(value) {
-				if (value <= 55) return 'lightgreen';
-				else if (value <= 150) return 'lightblue';
-				else if (value <= 250) return 'lightyellow';
-				else return 'lightred';
+			mounted() {
+				this.changePm25BackgroundColor()
+				// this.changePsiBackgroundColor()
+				this.getPsiAdvisory()
+				this.getPm25Advisory()
 			},
-			changePm25BackgroundColor() {
-				document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
-			},
-			changePsiBackgroundColor() {
-				document.body.classList.add(this.getPsiBackgroundColor(this.psi));
-			},
-			toggleToPsi() {
-				this.showPSI = true;
-				this.showPm25 = false;
-				document.body.classList.remove(this.getPm25BackgroundColor(this.pm25));
-				document.body.classList.add(this.getPsiBackgroundColor(this.psi));
-				document.getElementById('pm25Tag').style.opacity = 0.7;
-				document.getElementById('psiTag').style.opacity = 1;
-			},
-			toggleToPm25() {
-				this.showPSI = false;
-				this.showPm25 = true;
-				document.body.classList.remove(this.getPsiBackgroundColor(this.psi));
-				document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
-				document.getElementById('psiTag').style.opacity = 0.7;
-				document.getElementById('pm25Tag').style.opacity = 1;
-			},
-			getPsiAdvisory() {
-				if (this.psi <= 50) {
-					this.psiText = 'Normal activities';
-				} else if (this.psi <= 100) {
-					this.psiText = 'Normal activities';
-				} else if (this.psi <= 200) {
-					this.psiText = 'Do less of prolonged or strenous outdoor exertion. Vulnerable persons – do not do strenuous outdoor activity for the next hour.';
-				} else if (this.psi <= 300) {
-					this.psiText = 'Do not do prolonged or strenous outdoor exertion. Vulnerable persons – do not do all outdoor activity for the next hour.';
-				} else {
-					this.psiText = 'Do as little as possible all outdoor activity. Vulnerable persons – do not do all outdoor activity for the next hour.';
-				}
-			},
-			getPm25Advisory() {
-				if (this.pm25 <= 55) {
-					this.pm25Text = 'Continue with normal activities';
-				} else if (this.psi <= 150) {
-					this.pm25Text = 'Do less strenuous outdoor activity for the next hour. Vulnerable persons – Do not do strenuous outdoor activity for the next hour.';
-				} else if (this.psi <= 250) {
-					this.pm25Text = 'Do not do strenuous outdoor activity for the next hour. Vulnerable persons – do not do all outdoor activity for the next hour.';
-				} else {
-					this.pm25Text = 'Do as little as possible all outdoor activity for the next hour. Vulnerable persons – do not do all outdoor activity for the next hour.';
-				}
-			},
-			agetPm25Advisory() {
-				if (value <= 55) 'lightgreen';
-				else if (value <= 150) return 'lightblue';
-				else if (value <= 250) return 'lightyellow';
-				else return 'lightred';
-			},
-		}
-	});
-</script>
+			methods: {
+				fetchAirQualityData() {
+					// https://api.data.gov.sg/v1/environment/psi
+					fetch('https://api.data.gov.sg/v1/environment/psi')
+						.then(response => response.json())
+						.then(data => {
+							const items = data.items[0];
+							this.psi = items.readings.psi_twenty_four_hourly.national;
+							console.log("this.psi", this.psi)
+						})
+						.catch(error => console.error('Error fetching data:', error));
+					// https://api.data.gov.sg/v1/environment/pm25
+					fetch('https://api.data.gov.sg/v1/environment/pm25')
+						.then(response => response.json())
+						.then(data => {
+							const items = data.items[0];
+							this.pm25 = items.readings.pm25_one_hourly.central
+							console.log("this.pm25", this.pm25)
+						})
+						.catch(error => console.error('Error fetching data:', error));
+				},
+				getPsiBackgroundColor(value) {
+					if (value <= 50) return 'green';
+					else if (value <= 100) return 'blue';
+					else if (value <= 200) return 'yellow';
+					else if (value <= 300) return 'orange';
+					else return 'red';
+				},
+				getPm25BackgroundColor(value) {
+					if (value <= 55) return 'lightgreen';
+					else if (value <= 150) return 'lightblue';
+					else if (value <= 250) return 'lightyellow';
+					else return 'lightred';
+				},
+				changePm25BackgroundColor() {
+					document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
+				},
+				changePsiBackgroundColor() {
+					document.body.classList.add(this.getPsiBackgroundColor(this.psi));
+				},
+				toggleToPsi() {
+					this.showPSI = true;
+					this.showPm25 = false;
+					document.body.classList.remove(this.getPm25BackgroundColor(this.pm25));
+					document.body.classList.add(this.getPsiBackgroundColor(this.psi));
+					document.getElementById('pm25Tag').style.opacity = 0.7;
+					document.getElementById('psiTag').style.opacity = 1;
+				},
+				toggleToPm25() {
+					this.showPSI = false;
+					this.showPm25 = true;
+					document.body.classList.remove(this.getPsiBackgroundColor(this.psi));
+					document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
+					document.getElementById('psiTag').style.opacity = 0.7;
+					document.getElementById('pm25Tag').style.opacity = 1;
+				},
+				getPsiAdvisory() {
+					if (this.psi <= 50) {
+						this.psiText = 'Normal activities';
+					} else if (this.psi <= 100) {
+						this.psiText = 'Normal activities';
+					} else if (this.psi <= 200) {
+						this.psiText = 'Do less of prolonged or strenous outdoor exertion. Vulnerable persons – do not do strenuous outdoor activity for the next hour.';
+					} else if (this.psi <= 300) {
+						this.psiText = 'Do not do prolonged or strenous outdoor exertion. Vulnerable persons – do not do all outdoor activity for the next hour.';
+					} else {
+						this.psiText = 'Do as little as possible all outdoor activity. Vulnerable persons – do not do all outdoor activity for the next hour.';
+					}
+				},
+				getPm25Advisory() {
+					if (this.pm25 <= 55) {
+						this.pm25Text = 'Continue with normal activities';
+					} else if (this.psi <= 150) {
+						this.pm25Text = 'Do less strenuous outdoor activity for the next hour. Vulnerable persons – Do not do strenuous outdoor activity for the next hour.';
+					} else if (this.psi <= 250) {
+						this.pm25Text = 'Do not do strenuous outdoor activity for the next hour. Vulnerable persons – do not do all outdoor activity for the next hour.';
+					} else {
+						this.pm25Text = 'Do as little as possible all outdoor activity for the next hour. Vulnerable persons – do not do all outdoor activity for the next hour.';
+					}
+				},
+				agetPm25Advisory() {
+					if (value <= 55) 'lightgreen';
+					else if (value <= 150) return 'lightblue';
+					else if (value <= 250) return 'lightyellow';
+					else return 'lightred';
+				},
+			}
+		});
+	</script>
+</body>
 
 </html>
