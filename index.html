@@ -24,7 +24,7 @@
 	<meta property="twitter:image" content="https://i.ibb.co/KmRHYJH/psisg-og-image.png" />
 
 	<!-- Mobile app icon -->
-	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="apple-mobile-web-app-title" content="PSI.SG 🇸🇬 – one-stop haze updates for Singapore">
 	<meta name="mobile-web-app-capable" content="yes">
@@ -67,6 +67,10 @@
 			font-size: 1em;
 			font-weight: lighter;
 			padding-bottom: 0.5em;
+		}
+
+		.footer {
+			font-size: 0.8em;
 		}
 
 		.green {
@@ -147,7 +151,7 @@
 	<div id="app">
 		<div class="togglegroup"><span id="pm25Tag" class="tag"><a @click="toggleToPm25">1h PM2.5</a></span><span style="font-weight: bold; color: #505050">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><span id="psiTag" class="tag"><a @click="toggleToPsi">24h PSI</a></span></div>
 		<div v-if="showPm25" :class="getPm25BackgroundColor(pm25)">
-			<div style="font-size: 2em">PM2.5</div>
+			<div style="font-size: 2em">PM2.5<span style="cursor: pointer" @click="refresh">&nbsp; &#10227;</span></div>
 			<div class="pm25-number">{{ pm25 }}</div>
 			<div class="box">
 				<p><strong>How to use this reading:</strong></p>
@@ -161,7 +165,7 @@
 		</div>
 
 		<div v-if="showPSI" :class="getPsiBackgroundColor(psi)">
-			<div style="font-size: 2em">PSI</div>
+			<div style="font-size: 2em">PSI<span style="cursor: pointer" @click="refresh">&nbsp; &#10227;</span></div>
 			<div class="psi-number">{{ psi }}</div>
 			<div class="box">
 				<p><strong>How to use this reading:</strong></p>
@@ -173,6 +177,30 @@
 				<div class="info-text">{{ psiText }}</div>
 			</div>
 		</div>
+		<br /><br />
+		————————————————
+		<br /><br />
+		<p>Made by <a href="https://buymeacoffee.com/jasonleowsg">@jasonleowsg</a></p>
+		<br />
+		<details class="footer">
+			<summary>Add this web app to your phone's home screen! Here's how 👇</summary>
+			<div class="box" style="margin-top: 1em; text-align: left !important">
+				<p><strong>iOS</strong>
+				<ul>
+					<li>Open this site in Safari</li>
+					<li>Tap on Share button</li>
+					<li>Select Add to Home Screen</li>
+				</ul>
+
+				<strong>Android</strong>
+				<ul>
+					<li>Open this site in Chrome</li>
+					<li>Tap on the menu icon (3 dots in upper right-hand corner)</li>
+					<li>Tap Add to home screen</li>
+				</ul>
+				</p>
+			</div>
+		</details>
 		<br />
 	</div>
 
@@ -284,6 +312,9 @@
 					else if (value <= 150) return 'lightblue';
 					else if (value <= 250) return 'lightyellow';
 					else return 'lightred';
+				},
+				refresh() {
+					window.location.reload();
 				},
 			}
 		});
