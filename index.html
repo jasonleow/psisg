@@ -37,6 +37,7 @@
 			margin: 0;
 			padding: 0;
 			font-family: 'Arial', sans-serif;
+			/*animation: fadeIn 1s ease-in-out;*/
 		}
 
 		#app {
@@ -47,11 +48,10 @@
 			left: 50%;
 			-ms-transform: translate(-50%, -50%);
 			transform: translate(-50%, -50%);
-			animation: fadeIn 1s ease-in-out;
 		}
-		
+
 		.fade-in {
-			animation: fadeIn 1s ease-in-out;
+			animation: fadeIn 0.8s ease-in-out;
 		}
 
 		@keyframes fadeIn {
@@ -64,9 +64,34 @@
 			}
 		}
 
+		.fade-out-in {
+			animation: fade 0.8s ease-in-out forwards;
+		}
+
+		@keyframes fade {
+			0% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+
+		.translation-bar {
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: 1em 1.5em 0 0;
+		}
+
 		.box {
 			background-color: #ffffff;
-			padding: 0.8em 2em 1.1em 2em;
+			padding: 0.8em 2em 1.2em 2em;
 			border-radius: 5px;
 			color: #505050 !important;
 			max-width: 300px;
@@ -185,27 +210,112 @@
 </head>
 
 <body>
+	<div id="translationBar" class="translation-bar"><a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">中文</a> | <a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=ms&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">Bahasa melayu</a> | <a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=ta&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">தமிழ்</a></div>
 	<div id="app">
 		<div class="togglegroup"><span id="pm25Tag" class="tag"><a @click="toggleToPm25">1h PM2.5</a></span><span style="font-weight: bold; color: #505050">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><span id="psiTag" class="tag"><a @click="toggleToPsi">24h PSI</a></span></div>
-		<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
-			<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="fetchAirQualityData">&nbsp; &#10227;</span></div>
-			<div class="pm25-number">{{ pm25 }}</div>
-			<div class="index-text">Central</div>
-			<div class="index-text">North - {{ pm25north }} &nbsp;&nbsp; South - {{ pm25south }} <br /> East - {{ pm25east }} &nbsp;&nbsp; West - {{ pm25west }}</div>
-			<p class="time-box">Updated as at {{ pm25time }}</p>
-			<div class="box">
-				<p><strong>&#x24D8; How to use this reading:</strong></p>
-				<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
+
+		<!-- PREFERENCE SET TO CENTRAL REGION -->
+		<div v-show="preferCentral">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
+				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;</span></div>
+				<div class="pm25-number">{{ pm25 }}</div>
+				<div class="index-text">Central</div>
+				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
+				<p class="time-box">Updated as at {{ pm25time }}</p>
+				<div class="box">
+					<p><strong>&#x24D8; How to use this reading:</strong></p>
+					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
+				</div>
+				<br />
+				<div class="box">
+					<p><strong>&#x26A0; Health advisory: What you can do</strong></p>
+					<div class="info-text">{{ pm25Text }}</div>
+				</div>
 			</div>
-			<br />
-			<div class="box">
-				<p><strong>&#9758; Health advisory: What you can do</strong></p>
-				<div class="info-text">{{ pm25Text }}</div>
+		</div>
+
+		<!-- PREFERENCE SET TO NORTH REGION -->
+		<div v-show="preferNorth">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
+				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;</span></div>
+				<div class="pm25-number">{{ pm25north }}</div>
+				<div class="index-text">North</div>
+				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
+				<p class="time-box">Updated as at {{ pm25time }}</p>
+				<div class="box">
+					<p><strong>&#x24D8; How to use this reading:</strong></p>
+					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
+				</div>
+				<br />
+				<div class="box">
+					<p><strong>&#x26A0; Health advisory: What you can do</strong></p>
+					<div class="info-text">{{ pm25Text }}</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- PREFERENCE SET TO SOUTH REGION -->
+		<div v-show="preferSouth">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
+				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;</span></div>
+				<div class="pm25-number">{{ pm25south }}</div>
+				<div class="index-text">South</div>
+				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
+				<p class="time-box">Updated as at {{ pm25time }}</p>
+				<div class="box">
+					<p><strong>&#x24D8; How to use this reading:</strong></p>
+					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
+				</div>
+				<br />
+				<div class="box">
+					<p><strong>&#x26A0; Health advisory: What you can do</strong></p>
+					<div class="info-text">{{ pm25Text }}</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- PREFERENCE SET TO EAST REGION -->
+		<div v-show="preferEast">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
+				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;</span></div>
+				<div class="pm25-number">{{ pm25east }}</div>
+				<div class="index-text">East</div>
+				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
+				<p class="time-box">Updated as at {{ pm25time }}</p>
+				<div class="box">
+					<p><strong>&#x24D8; How to use this reading:</strong></p>
+					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
+				</div>
+				<br />
+				<div class="box">
+					<p><strong>&#x26A0; Health advisory: What you can do</strong></p>
+					<div class="info-text">{{ pm25Text }}</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- PREFERENCE SET TO WEST REGION -->
+		<div v-show="preferWest">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
+				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;</span></div>
+				<div class="pm25-number">{{ pm25west }}</div>
+				<div class="index-text">West</div>
+				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span></div>
+				<p class="time-box">Updated as at {{ pm25time }}</p>
+				<div class="box">
+					<p><strong>&#x24D8; How to use this reading:</strong></p>
+					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
+				</div>
+				<br />
+				<div class="box">
+					<p><strong>&#x26A0; Health advisory: What you can do</strong></p>
+					<div class="info-text">{{ pm25Text }}</div>
+				</div>
 			</div>
 		</div>
 
 		<div v-show="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in">
-			<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="fetchAirQualityData">&nbsp; &#10227;</span></div>
+			<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;</span></div>
 			<div class="psi-number">{{ psi }}</div>
 			<div class="time-box">Updated as at {{ psitime }}</div>
 			<div class="box">
@@ -259,7 +369,12 @@
 				showPm25: true,
 				showPSI: false,
 				psiText: '',
-				pm25Text: ''
+				pm25Text: '',
+				preferCentral: true,
+				preferNorth: false,
+				preferSouth: false,
+				preferEast: false,
+				preferWest: false,
 			},
 			created() {
 				this.fetchAirQualityData();
@@ -267,6 +382,7 @@
 				// setInterval(this.fetchAirQualityData, 60000); // Update every minute 
 			},
 			mounted() {
+				this.setRegion()
 				this.changePm25BackgroundColor()
 				// this.changePsiBackgroundColor()
 				this.getPsiAdvisory()
@@ -296,7 +412,7 @@
 							this.pm25north = items.readings.pm25_one_hourly.north
 							this.pm25south = items.readings.pm25_one_hourly.south
 							this.pm25east = items.readings.pm25_one_hourly.east
-							this.pm25west = items.readings.pm25_one_hourly.west					
+							this.pm25west = items.readings.pm25_one_hourly.west
 						})
 						.catch(error => console.error('Error fetching data:', error));
 				},
@@ -376,14 +492,129 @@
 					console.log('toggle to this.pm25', this.pm25)
 				},
 				agetPm25Advisory() {
-					if (value <= 55) 'lightgreen';
+					if (value <= 55) return 'lightgreen';
 					else if (value <= 150) return 'lightblue';
 					else if (value <= 250) return 'lightyellow';
 					else return 'lightred';
 				},
-				// function no longer in use
 				refresh() {
-					window.location.reload();
+					this.fetchAirQualityData();
+					document.body.classList.add('fade-out-in', true)
+					setTimeout(function() {
+						document.body.classList.remove('fade-out-in')
+					}, 1000);
+				},
+				toggleRegion(r) {
+					if (r == 'central') {
+						this.preferCentral = true;
+						this.preferNorth = false;
+						this.preferSouth = false;
+						this.preferEast = false;
+						this.preferWest = false;
+						localStorage.removeItem('regionPreference');
+						localStorage.setItem('regionPreference', JSON.stringify('central'));
+						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+					}
+					else if (r == 'north') {
+						this.preferCentral = false;
+						this.preferNorth = true
+						this.preferSouth = false;
+						this.preferEast = false;
+						this.preferWest = false;
+						localStorage.removeItem('regionPreference');
+						localStorage.setItem('regionPreference', JSON.stringify('north'));
+						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+					}
+					else if (r == 'south') {
+						this.preferNorth = false;
+						this.preferSouth = true
+						this.preferCentral = false;
+						this.preferEast = false;
+						this.preferWest = false;
+						localStorage.removeItem('regionPreference');
+						localStorage.setItem('regionPreference', JSON.stringify('south'));
+						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+					}
+					else if (r == 'east') {
+						this.preferNorth = false;
+						this.preferSouth = false;
+						this.preferCentral = false;
+						this.preferEast = true
+						this.preferWest = false;
+						localStorage.removeItem('regionPreference');
+						localStorage.setItem('regionPreference', JSON.stringify('east'));
+						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+					}
+					else if (r == 'west') {
+						this.preferNorth = false;
+						this.preferSouth = false;
+						this.preferEast = false;
+						this.preferWest = true
+						this.preferCentral = false;
+						localStorage.removeItem('regionPreference');
+						localStorage.setItem('regionPreference', JSON.stringify('west'));
+						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+					}
+					else {
+						// 
+					}
+				},
+				setRegion() {
+					const regionPreference = JSON.parse(localStorage.getItem('regionPreference'));
+					console.log('regionPreference', regionPreference)
+					if (regionPreference == 'central') {
+						this.preferCentral = true;
+						this.preferNorth = false;
+						this.preferSouth = false;
+						this.preferEast = false;
+						this.preferWest = false;
+						localStorage.removeItem('regionPreference');
+						localStorage.setItem('regionPreference', JSON.stringify('central'));
+						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+					}
+					else if (regionPreference == 'north') {
+						this.preferCentral = false;
+						this.preferNorth = true
+						this.preferSouth = false;
+						this.preferEast = false;
+						this.preferWest = false;
+						localStorage.removeItem('regionPreference');
+						localStorage.setItem('regionPreference', JSON.stringify('north'));
+						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+					}
+					else if (regionPreference == 'south') {
+						this.preferNorth = false;
+						this.preferSouth = true
+						this.preferCentral = false;
+						this.preferEast = false;
+						this.preferWest = false;
+						localStorage.removeItem('regionPreference');
+						localStorage.setItem('regionPreference', JSON.stringify('south'));
+						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+					}
+					else if (regionPreference == 'east') {
+						this.preferNorth = false;
+						this.preferSouth = false;
+						this.preferCentral = false;
+						this.preferEast = true
+						this.preferWest = false;
+						localStorage.removeItem('regionPreference');
+						localStorage.setItem('regionPreference', JSON.stringify('east'));
+						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+					}
+					else if (regionPreference == 'west') {
+						this.preferNorth = false;
+						this.preferSouth = false;
+						this.preferEast = false;
+						this.preferWest = true
+						this.preferCentral = false;
+						localStorage.removeItem('regionPreference');
+						localStorage.setItem('regionPreference', JSON.stringify('west'));
+						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+					}
+					else {
+						// 
+					}
 				},
 			}
 		});
