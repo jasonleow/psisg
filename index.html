@@ -187,7 +187,7 @@
 <body>
 	<div id="app">
 		<div class="togglegroup"><span id="pm25Tag" class="tag"><a @click="toggleToPm25">1h PM2.5</a></span><span style="font-weight: bold; color: #505050">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><span id="psiTag" class="tag"><a @click="toggleToPsi">24h PSI</a></span></div>
-		<div v-if="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
+		<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
 			<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="fetchAirQualityData">&nbsp; &#10227;</span></div>
 			<div class="pm25-number">{{ pm25 }}</div>
 			<div class="index-text">Central</div>
@@ -204,7 +204,7 @@
 			</div>
 		</div>
 
-		<div v-if="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in">
+		<div v-show="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in">
 			<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="fetchAirQualityData">&nbsp; &#10227;</span></div>
 			<div class="psi-number">{{ psi }}</div>
 			<div class="time-box">Updated as at {{ psitime }}</div>
