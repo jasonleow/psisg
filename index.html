@@ -44,6 +44,7 @@
 			text-align: center;
 			height: 100%;
 			position: absolute;
+			margin-top: 0.5em;
 			top: 60%;
 			left: 50%;
 			-ms-transform: translate(-50%, -50%);
@@ -205,12 +206,21 @@
 				-ms-transform: translate(-50%, -50%);
 				transform: translate(-50%, -50%);
 			}
+
+			.translation-bar {
+				position: absolute;
+				top: 0;
+				right: 28%;
+				font-size: 0.8em;
+				/* -ms-transform: translateX(-70%);
+				transform: translateX(-70%); */
+			}
 		}
 	</style>
 </head>
 
 <body>
-	<div id="translationBar" class="translation-bar"><a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">中文</a> | <a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=ms&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">Bahasa melayu</a> | <a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=ta&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">தமிழ்</a></div>
+	<div id="translationBar" class="translation-bar"><a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">中文 |&nbsp;&nbsp;</a><a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=ms&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">Bahasa melayu |&nbsp;&nbsp;</a><a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=ta&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">தமிழ்</a></div>
 	<div id="app">
 		<div class="togglegroup"><span id="pm25Tag" class="tag"><a @click="toggleToPm25">1h PM2.5</a></span><span style="font-weight: bold; color: #505050">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><span id="psiTag" class="tag"><a @click="toggleToPsi">24h PSI</a></span></div>
 
@@ -514,8 +524,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('central'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
-					}
-					else if (r == 'north') {
+					} else if (r == 'north') {
 						this.preferCentral = false;
 						this.preferNorth = true
 						this.preferSouth = false;
@@ -524,8 +533,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('north'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
-					}
-					else if (r == 'south') {
+					} else if (r == 'south') {
 						this.preferNorth = false;
 						this.preferSouth = true
 						this.preferCentral = false;
@@ -534,8 +542,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('south'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
-					}
-					else if (r == 'east') {
+					} else if (r == 'east') {
 						this.preferNorth = false;
 						this.preferSouth = false;
 						this.preferCentral = false;
@@ -544,8 +551,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('east'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
-					}
-					else if (r == 'west') {
+					} else if (r == 'west') {
 						this.preferNorth = false;
 						this.preferSouth = false;
 						this.preferEast = false;
@@ -554,8 +560,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('west'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
-					}
-					else {
+					} else {
 						// 
 					}
 				},
@@ -571,8 +576,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('central'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
-					}
-					else if (regionPreference == 'north') {
+					} else if (regionPreference == 'north') {
 						this.preferCentral = false;
 						this.preferNorth = true
 						this.preferSouth = false;
@@ -581,8 +585,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('north'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
-					}
-					else if (regionPreference == 'south') {
+					} else if (regionPreference == 'south') {
 						this.preferNorth = false;
 						this.preferSouth = true
 						this.preferCentral = false;
@@ -591,8 +594,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('south'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
-					}
-					else if (regionPreference == 'east') {
+					} else if (regionPreference == 'east') {
 						this.preferNorth = false;
 						this.preferSouth = false;
 						this.preferCentral = false;
@@ -601,8 +603,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('east'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
-					}
-					else if (regionPreference == 'west') {
+					} else if (regionPreference == 'west') {
 						this.preferNorth = false;
 						this.preferSouth = false;
 						this.preferEast = false;
@@ -611,8 +612,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('west'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
-					}
-					else {
+					} else {
 						// 
 					}
 				},
