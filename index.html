@@ -47,14 +47,37 @@
 			left: 50%;
 			-ms-transform: translate(-50%, -50%);
 			transform: translate(-50%, -50%);
+			animation: fadeIn 1s ease-in-out;
+		}
+		
+		.fade-in {
+			animation: fadeIn 1s ease-in-out;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
 		}
 
 		.box {
 			background-color: #ffffff;
-			padding: 1em 2em;
+			padding: 0.8em 2em 1.1em 2em;
 			border-radius: 5px;
 			color: #505050 !important;
 			max-width: 300px;
+		}
+
+		.time-box {
+			padding: 1em 2em;
+			border-radius: 5px;
+			max-width: 300px;
+			margin: 0 0 4em 0;
+			font-size: 0.8em;
 		}
 
 		.psi-number,
@@ -69,8 +92,16 @@
 			padding-bottom: 0.5em;
 		}
 
+		.index-text {
+			font-size: 1.5em;
+			margin: 0 0 1.5em 0;
+		}
+
 		.footer {
 			font-size: 0.8em;
+			max-width: 400px;
+			text-align: center;
+			text-wrap: wrap;
 		}
 
 		.green {
@@ -136,6 +167,12 @@
 			cursor: pointer;
 		}
 
+		.refreshicon {
+			cursor: pointer;
+			position: absolute;
+			margin-top: -8px;
+		}
+
 		@media only screen and (max-width: 600px) {
 			#app {
 				top: 60%;
@@ -150,23 +187,27 @@
 <body>
 	<div id="app">
 		<div class="togglegroup"><span id="pm25Tag" class="tag"><a @click="toggleToPm25">1h PM2.5</a></span><span style="font-weight: bold; color: #505050">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><span id="psiTag" class="tag"><a @click="toggleToPsi">24h PSI</a></span></div>
-		<div v-if="showPm25" :class="getPm25BackgroundColor(pm25)">
-			<div style="font-size: 2em">PM2.5<span style="cursor: pointer" @click="refresh">&nbsp; &#10227;</span></div>
+		<div v-if="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
+			<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="fetchAirQualityData">&nbsp; &#10227;</span></div>
 			<div class="pm25-number">{{ pm25 }}</div>
+			<div class="index-text">Central</div>
+			<div class="index-text">North - {{ pm25north }} &nbsp;&nbsp; South - {{ pm25south }} <br /> East - {{ pm25east }} &nbsp;&nbsp; West - {{ pm25west }}</div>
+			<p class="time-box">Updated as at {{ pm25time }}</p>
 			<div class="box">
-				<p><strong>How to use this reading:</strong></p>
+				<p><strong>&#x24D8; How to use this reading:</strong></p>
 				<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
 			</div>
 			<br />
 			<div class="box">
-				<p><strong>Health advisory: What you can do</strong></p>
+				<p><strong>&#9758; Health advisory: What you can do</strong></p>
 				<div class="info-text">{{ pm25Text }}</div>
 			</div>
 		</div>
 
-		<div v-if="showPSI" :class="getPsiBackgroundColor(psi)">
-			<div style="font-size: 2em">PSI<span style="cursor: pointer" @click="refresh">&nbsp; &#10227;</span></div>
+		<div v-if="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in">
+			<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="fetchAirQualityData">&nbsp; &#10227;</span></div>
 			<div class="psi-number">{{ psi }}</div>
+			<div class="time-box">Updated as at {{ psitime }}</div>
 			<div class="box">
 				<p><strong>How to use this reading:</strong></p>
 				<p>Use the 24h PSI forecast to plan your activities for <strong>tomorrow</strong>.</p>
@@ -183,7 +224,7 @@
 		<p>Made by <a href="https://buymeacoffee.com/jasonleowsg" style="color: inherit !important" target="_blank">@jasonleowsg</a></p>
 		<br />
 		<details class="footer">
-			<summary>Add this web app to your phone's home screen! Here's how 👇</summary>
+			<summary>Add this web app to your phone's home screen! Here's how:</summary>
 			<div class="box" style="margin-top: 1em; text-align: left !important">
 				<p><strong>iOS</strong>
 				<ul>
@@ -211,6 +252,10 @@
 			data: {
 				psi: 0,
 				pm25: 0,
+				pm25north: 0,
+				pm25south: 0,
+				pm25east: 0,
+				pm25west: 0,
 				showPm25: true,
 				showPSI: false,
 				psiText: '',
@@ -234,6 +279,7 @@
 						.then(response => response.json())
 						.then(data => {
 							const items = data.items[0];
+							this.psitime = this.getLocaleTimestamp(items.update_timestamp)
 							this.psi = items.readings.psi_twenty_four_hourly.national;
 							console.log("this.psi", this.psi)
 						})
@@ -243,10 +289,28 @@
 						.then(response => response.json())
 						.then(data => {
 							const items = data.items[0];
+							this.pm25time = this.getLocaleTimestamp(items.update_timestamp)
+							console.log("this.pm25time", this.pm25time)
 							this.pm25 = items.readings.pm25_one_hourly.central
 							console.log("this.pm25", this.pm25)
+							this.pm25north = items.readings.pm25_one_hourly.north
+							this.pm25south = items.readings.pm25_one_hourly.south
+							this.pm25east = items.readings.pm25_one_hourly.east
+							this.pm25west = items.readings.pm25_one_hourly.west					
 						})
 						.catch(error => console.error('Error fetching data:', error));
+				},
+				getLocaleTimestamp(t) {
+					const localDate = new Date(t).toLocaleDateString("en-SG", {
+						day: "2-digit",
+						month: "short",
+						year: "numeric",
+						hour: "2-digit",
+						minute: "2-digit",
+						hour12: true
+					});
+					console.log(localDate);
+					return localDate;
 				},
 				getPsiBackgroundColor(value) {
 					if (value <= 50) return 'green';
@@ -274,6 +338,7 @@
 					document.body.classList.add(this.getPsiBackgroundColor(this.psi));
 					document.getElementById('pm25Tag').style.opacity = 0.7;
 					document.getElementById('psiTag').style.opacity = 1;
+					this.fetchAirQualityData()
 				},
 				toggleToPm25() {
 					this.showPSI = false;
@@ -282,12 +347,13 @@
 					document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
 					document.getElementById('psiTag').style.opacity = 0.7;
 					document.getElementById('pm25Tag').style.opacity = 1;
+					this.fetchAirQualityData()
 				},
 				getPsiAdvisory() {
 					if (this.psi <= 50) {
-						this.psiText = 'Normal activities';
+						this.psiText = 'Normal activities.';
 					} else if (this.psi <= 100) {
-						this.psiText = 'Normal activities';
+						this.psiText = 'Normal activities.';
 					} else if (this.psi <= 200) {
 						this.psiText = 'Do less of prolonged or strenous outdoor exertion. Vulnerable persons – do not do strenuous outdoor activity for the next hour.';
 					} else if (this.psi <= 300) {
@@ -295,10 +361,11 @@
 					} else {
 						this.psiText = 'Do as little as possible all outdoor activity. Vulnerable persons – do not do all outdoor activity for the next hour.';
 					}
+					console.log('toggle to this.psi', this.psi)
 				},
 				getPm25Advisory() {
 					if (this.pm25 <= 55) {
-						this.pm25Text = 'Continue with normal activities';
+						this.pm25Text = 'Continue with normal activities.';
 					} else if (this.psi <= 150) {
 						this.pm25Text = 'Do less strenuous outdoor activity for the next hour. Vulnerable persons – Do not do strenuous outdoor activity for the next hour.';
 					} else if (this.psi <= 250) {
@@ -306,6 +373,7 @@
 					} else {
 						this.pm25Text = 'Do as little as possible all outdoor activity for the next hour. Vulnerable persons – do not do all outdoor activity for the next hour.';
 					}
+					console.log('toggle to this.pm25', this.pm25)
 				},
 				agetPm25Advisory() {
 					if (value <= 55) 'lightgreen';
@@ -313,6 +381,7 @@
 					else if (value <= 250) return 'lightyellow';
 					else return 'lightred';
 				},
+				// function no longer in use
 				refresh() {
 					window.location.reload();
 				},
