@@ -235,18 +235,18 @@
 		<!-- PREFERENCE SET TO CENTRAL REGION -->
 		<div v-show="preferCentral">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
-				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;</span></div>
+				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number">{{ pm25 }}</div>
 				<div class="index-text">Central</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="box">
-					<p><strong>&#x24D8; How to use this reading:</strong></p>
+					<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
 					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
 				</div>
 				<br />
 				<div class="box">
-					<p><strong>&#x26A0; Health advisory: What you can do</strong></p>
+					<p><strong>&#x26A0;&#xFE0E; Health advisory: What you can do</strong></p>
 					<div class="info-text">{{ pm25Text }}</div>
 				</div>
 			</div>
@@ -255,18 +255,18 @@
 		<!-- PREFERENCE SET TO NORTH REGION -->
 		<div v-show="preferNorth">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
-				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;</span></div>
+				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number">{{ pm25north }}</div>
 				<div class="index-text">North</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="box">
-					<p><strong>&#x24D8; How to use this reading:</strong></p>
+					<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
 					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
 				</div>
 				<br />
 				<div class="box">
-					<p><strong>&#x26A0; Health advisory: What you can do</strong></p>
+					<p><strong>&#x26A0;&#xFE0E; Health advisory: What you can do</strong></p>
 					<div class="info-text">{{ pm25Text }}</div>
 				</div>
 			</div>
@@ -275,18 +275,18 @@
 		<!-- PREFERENCE SET TO SOUTH REGION -->
 		<div v-show="preferSouth">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
-				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;</span></div>
+				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number">{{ pm25south }}</div>
 				<div class="index-text">South</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="box">
-					<p><strong>&#x24D8; How to use this reading:</strong></p>
+					<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
 					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
 				</div>
 				<br />
 				<div class="box">
-					<p><strong>&#x26A0; Health advisory: What you can do</strong></p>
+					<p><strong>&#x26A0;&#xFE0E; Health advisory: What you can do</strong></p>
 					<div class="info-text">{{ pm25Text }}</div>
 				</div>
 			</div>
@@ -295,18 +295,18 @@
 		<!-- PREFERENCE SET TO EAST REGION -->
 		<div v-show="preferEast">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
-				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;</span></div>
+				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number">{{ pm25east }}</div>
 				<div class="index-text">East</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="box">
-					<p><strong>&#x24D8; How to use this reading:</strong></p>
+					<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
 					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
 				</div>
 				<br />
 				<div class="box">
-					<p><strong>&#x26A0; Health advisory: What you can do</strong></p>
+					<p><strong>&#x26A0;&#xFE0E; Health advisory: What you can do</strong></p>
 					<div class="info-text">{{ pm25Text }}</div>
 				</div>
 			</div>
@@ -315,34 +315,34 @@
 		<!-- PREFERENCE SET TO WEST REGION -->
 		<div v-show="preferWest">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
-				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;</span></div>
+				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number">{{ pm25west }}</div>
 				<div class="index-text">West</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="box">
-					<p><strong>&#x24D8; How to use this reading:</strong></p>
+					<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
 					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
 				</div>
 				<br />
 				<div class="box">
-					<p><strong>&#x26A0; Health advisory: What you can do</strong></p>
+					<p><strong>&#x26A0;&#xFE0E; Health advisory: What you can do</strong></p>
 					<div class="info-text">{{ pm25Text }}</div>
 				</div>
 			</div>
 		</div>
 
 		<div v-show="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in">
-			<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;</span></div>
+			<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 			<div class="psi-number">{{ psi }}</div>
 			<div class="time-box">Updated at {{ psitime }}</div>
 			<div class="box">
-				<p><strong>How to use this reading:</strong></p>
+				<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
 				<p>Use the 24h PSI forecast to plan your activities for <strong>tomorrow</strong>.</p>
 			</div>
 			<br />
 			<div class="box">
-				<p><strong>Health advisory: What you can do</strong></p>
+				<p><strong>&#x26A0;&#xFE0E; Health advisory: What you can do</strong></p>
 				<div class="info-text">{{ psiText }}</div>
 			</div>
 		</div>
@@ -350,7 +350,7 @@
 		————————————————
 		<br /><br />
 		<div class="footer">
-		<p>Made by <a href="https://buymeacoffee.com/jasonleowsg" style="color: inherit !important" target="_blank">@jasonleowsg</a>.If you like this, please support more community projects by buying me a coffee &#9660;</p>
+		<p>Made by <a href="https://buymeacoffee.com/jasonleowsg" style="color: inherit !important" target="_blank">@jasonleowsg</a>.If you like this, please support more community projects by buying me a coffee &#9660;&#xFE0E;</p>
 			<br />
 		<a href="https://www.buymeacoffee.com/jasonleowsg" target="_blank" style="border-color: #eee !important;"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 42px !important;width: 150px !important"></a>
 		</div>
