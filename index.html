@@ -62,18 +62,41 @@
 			-ms-transform: translate(-50%, -50%);
 			transform: translate(-50%, -50%);
 		}
-
-		.fade-in {
-			animation: fadeIn 0.8s ease-in-out;
+		
+		.slide-left {
+			transform: translateX(-100%);
+		    transition: transform 0.5s ease-in-out;
 		}
 
-		@keyframes fadeIn {
+		.fade-in-right {
+			animation: fadeInRight 0.8s ease-in-out;
+		}
+
+		@keyframes fadeInRight {
 			from {
 				opacity: 0;
+				transform: translateX(200%);
 			}
 
 			to {
 				opacity: 1;
+				transform: translateX(0%);
+			}
+		}
+		
+		.fade-in-left {
+			animation: fadeInLeft 0.8s ease-in-out;
+		}
+
+		@keyframes fadeInLeft {
+			from {
+				opacity: 0;
+				transform: translateX(-200%);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateX(0%);
 			}
 		}
 
@@ -232,12 +255,13 @@
 		}
 
 		.tag {
-			padding: 0.25em 0.5em;
-			margin: 0.25em 0.5em;
+			padding: 0.5em 1em;
+			margin: 0.25em 1em;
 			border-radius: 0.25em;
-			background-color: #f1f1f1;
-			color: #333;
-			box-shadow: 2px 2px #9a9a9a;
+			border: none;
+			background-color: rgba(255,255,255,0.7);
+			color: #505050;
+			box-shadow: 2px 2px rgba(0,0,0,0.2);
 			font-size: 0.875em;
 			font-weight: bold;
 			letter-spacing: 0.05em;
@@ -258,6 +282,88 @@
 			display: inline-block;
 			margin: 0 5px 2em 5px;
 			vertical-align: middle;
+			cursor: pointer;
+			opacity: 0.6;
+		}
+		
+		.pulse-circle {
+			position: relative;
+			bottom: 95px;
+			left: 60px;
+			text-align: right;
+			z-index: 1;
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			background-color: rgba(0, 0, 0, 0.4);
+			animation: pulse 8s ease-in-out forwards; 
+		}
+
+		@keyframes pulse {
+			0% {
+				transform: scale(1);
+				opacity: 0;
+			}
+			
+			49% {
+				transform: scale(1);
+				opacity: 0;
+			}
+			
+			50% {
+				transform: scale(1);
+				opacity: 0.7;
+			}
+
+			55% {
+				transform: scale(1.3);
+				opacity: 0.3;
+			}
+
+			60% {
+				transform: scale(1);
+				opacity: 0.7;
+			}
+
+			65% {
+				transform: scale(1.3);
+				opacity: 0.3;
+			}
+
+			70% {
+				transform: scale(1);
+				opacity: 0.7;
+			}
+			
+			75% {
+				transform: scale(1.3);
+				opacity: 0.3;
+			}
+
+			80% {
+				transform: scale(1);
+				opacity: 0.7;
+			}
+			
+			85% {
+				transform: scale(1.3);
+				opacity: 0.3;
+			}
+
+			90% {
+				transform: scale(1);
+				opacity: 0.7;
+			}
+			
+			95% {
+				transform: scale(1.3);
+				opacity: 0.3;
+			}
+
+			100% {
+				transform: scale(1);
+				opacity: 0;
+			}
 		}
 
 		@media only screen and (max-width: 600px) {
@@ -278,15 +384,16 @@
 <body>
 	<div id="translationBar" class="translation-bar"><a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">中文 |&nbsp;&nbsp;</a><a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=ms&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">Bahasa melayu |&nbsp;&nbsp;</a><a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=ta&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">தமிழ்</a></div>
 	<div id="app">
-		<div class="togglegroup"><span id="pm25Tag" class="tag"><a @click="toggleToPm25">1h PM2.5</a></span><span style="font-weight: bold; color: #505050">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><span id="psiTag" class="tag"><a @click="toggleToPsi">24h PSI</a></span></div>
+		<div class="togglegroup"><span id="pm25Tag" class="tag"><a @click="toggleToPm25">1h PM2.5</a></span><span style="font-weight: bold; color: #505050"></span><span id="psiTag" class="tag" style="box-shadow: none;"><a @click="toggleToPsi">24h PSI</a></span></div>
 
 		<!-- PREFERENCE SET TO CENTRAL REGION -->
 		<div v-show="preferCentral">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
-				<div class="pm25-number"><span>&nbsp;</span>{{ pm25 }}<span><a @click="toggleToPsi">&nbsp;</a></span></div>
+				<div class="pm25-number"><span>&nbsp;</span>{{ pm25 }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">Central</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
+				<div class="pulse-circle"></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
 				<div class="box">
@@ -303,9 +410,9 @@
 
 		<!-- PREFERENCE SET TO NORTH REGION -->
 		<div v-show="preferNorth">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
-				<div class="pm25-number"><span>&nbsp;</span>{{ pm25north }}<span><a @click="toggleToPsi">&nbsp;</a></span></div>
+				<div class="pm25-number"><span>&nbsp;</span>{{ pm25north }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">North</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
@@ -324,9 +431,9 @@
 
 		<!-- PREFERENCE SET TO SOUTH REGION -->
 		<div v-show="preferSouth">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
-				<div class="pm25-number"><span>&nbsp;</span>{{ pm25south }}<span><a @click="toggleToPsi">&nbsp;</a></span></div>
+				<div class="pm25-number"><span>&nbsp;</span>{{ pm25south }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">South</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
@@ -345,9 +452,9 @@
 
 		<!-- PREFERENCE SET TO EAST REGION -->
 		<div v-show="preferEast">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
-				<div class="pm25-number"><span>&nbsp;</span>{{ pm25east }}<span><a @click="toggleToPsi">&nbsp;</a></span></div>
+				<div class="pm25-number"><span>&nbsp;</span>{{ pm25east }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">East</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
@@ -366,9 +473,9 @@
 
 		<!-- PREFERENCE SET TO WEST REGION -->
 		<div v-show="preferWest">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
-				<div class="pm25-number"><span>&nbsp;</span>{{ pm25west }}<span><a @click="toggleToPsi">&nbsp;</a></span></div>
+				<div class="pm25-number"><span>&nbsp;</span>{{ pm25west }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">West</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
@@ -385,9 +492,9 @@
 			</div>
 		</div>
 
-		<div v-show="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in">
+		<div v-show="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in-right">
 			<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
-			<div class="psi-number"><span><a @click="toggleToPm25">&nbsp;</a></span>{{ psi }}<span>&nbsp;</span></div>
+			<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psi }}<span>&nbsp;</span></div>
 			<div class="time-box">Updated at {{ psitime }}</div>
 			<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
 			<div class="box">
@@ -530,6 +637,8 @@
 					document.body.classList.add(this.getPsiBackgroundColor(this.psi));
 					document.getElementById('pm25Tag').style.opacity = 0.7;
 					document.getElementById('psiTag').style.opacity = 1;
+					document.getElementById('pm25Tag').style.boxShadow = "none";
+					document.getElementById('psiTag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
 					this.fetchAirQualityData()
 				},
 				toggleToPm25() {
@@ -539,6 +648,8 @@
 					document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
 					document.getElementById('psiTag').style.opacity = 0.7;
 					document.getElementById('pm25Tag').style.opacity = 1;
+					document.getElementById('psiTag').style.boxShadow = "none";
+					document.getElementById('pm25Tag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
 					this.fetchAirQualityData()
 				},
 				getPsiAdvisory() {
