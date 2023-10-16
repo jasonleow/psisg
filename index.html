@@ -384,7 +384,7 @@
 <body>
 	<div id="translationBar" class="translation-bar"><a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">中文 |&nbsp;&nbsp;</a><a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=ms&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">Bahasa melayu |&nbsp;&nbsp;</a><a href="https://psi-sg.translate.goog/?_x_tr_sl=en&_x_tr_tl=ta&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" style="color: inherit !important">தமிழ்</a></div>
 	<div id="app">
-		<div class="togglegroup"><span id="pm25Tag" class="tag"><a @click="toggleToPm25">1h PM2.5</a></span><span style="font-weight: bold; color: #505050"></span><span id="psiTag" class="tag" style="box-shadow: none;"><a @click="toggleToPsi">24h PSI</a></span></div>
+		<div class="togglegroup"><span id="pm25Tag" class="tag" style="box-shadow: none;"><a @click="toggleToPm25">1h PM2.5</a></span><span style="font-weight: bold; color: #505050"></span><span id="psiTag" class="tag"><a @click="toggleToPsi">24h PSI</a></span></div>
 
 		<!-- PREFERENCE SET TO CENTRAL REGION -->
 		<div v-show="preferCentral">
@@ -641,8 +641,8 @@
 					document.body.classList.add(this.getPsiBackgroundColor(this.psi));
 					document.getElementById('pm25Tag').style.opacity = 0.7;
 					document.getElementById('psiTag').style.opacity = 1;
-					document.getElementById('pm25Tag').style.boxShadow = "none";
-					document.getElementById('psiTag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
+					document.getElementById('pm25Tag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
+					document.getElementById('psiTag').style.boxShadow = "none";
 					this.fetchAirQualityData()
 				},
 				toggleToPm25() {
@@ -652,8 +652,8 @@
 					document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
 					document.getElementById('psiTag').style.opacity = 0.7;
 					document.getElementById('pm25Tag').style.opacity = 1;
-					document.getElementById('psiTag').style.boxShadow = "none";
-					document.getElementById('pm25Tag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
+					document.getElementById('psiTag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
+					document.getElementById('pm25Tag').style.boxShadow = "none";
 					this.fetchAirQualityData()
 				},
 				getPsiAdvisory() {
