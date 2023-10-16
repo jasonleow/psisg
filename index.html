@@ -415,6 +415,7 @@
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25north }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">North</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
+				<div class="pulse-circle"></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
 				<div class="box">
@@ -436,6 +437,7 @@
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25south }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">South</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
+				<div class="pulse-circle"></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
 				<div class="box">
@@ -457,6 +459,7 @@
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25east }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">East</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
+				<div class="pulse-circle"></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
 				<div class="box">
@@ -478,6 +481,7 @@
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25west }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">West</div>
 				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span></div>
+				<div class="pulse-circle"></div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
 				<div class="box">
