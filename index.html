@@ -148,6 +148,7 @@
 		.pm25-number {
 			font-size: 15rem;
 			font-weight: bold;
+			width: 530px;
 		}
 
 		.info-text {
@@ -269,6 +270,19 @@
 			cursor: pointer;
 		}
 
+		.region-tag {
+			padding: 0.25em 0.5em;
+			margin: 0.2em;
+			border-radius: 0.25em;
+			border: none;
+			background-color: rgba(255, 255, 255, 0.7);
+			color: #505050;
+			cursor: pointer;
+			text-wrap: wrap;
+			display: inline-block;
+			width: 140px;
+		}
+
 		.refreshicon {
 			cursor: pointer;
 			position: absolute;
@@ -289,15 +303,15 @@
 
 		.pulse-group {
 			position: relative;
-			bottom: 40px;
+			bottom: 60px;
 			left: 30px;
 			margin-bottom: 60px;
 		}
 
 		.pulse-circle {
 			position: absolute;
-			bottom: 21px;
-			left: 16px;
+			bottom: 32px;
+			left: 26px;
 			z-index: 998;
 			width: 30px;
 			height: 30px;
@@ -444,13 +458,35 @@
 				max-width: 250px;
 			}
 
+			.psi-number,
+			.pm25-number {
+				font-size: 14rem;
+				width: 500px;
+			}
+
 			.footer {
-				font-size: 0.7em;
+				font-size: 0.8em;
 				max-width: 350px;
 			}
 
+			.pulse-group {
+				bottom: 60px;
+				left: 20px;
+				margin-bottom: 60px;
+			}
+
+			.pulse-circle {
+				bottom: 30px;
+				left: 24px;
+				width: 30px;
+				height: 30px;
+			}
+
 			.pulse-hand {
+				bottom: 0px;
+				left: 0px;
 				width: 12%;
+				margin-bottom: 0px;
 			}
 		}
 	</style>
@@ -467,7 +503,7 @@
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25 }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">Central</div>
-				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span><br /><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
 					<img class="pulse-hand" src="https://i.ibb.co/Lh6rgg8/double-tap.png" />
@@ -492,7 +528,7 @@
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25north }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">North</div>
-				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span><br /><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
 					<img class="pulse-hand" src="https://i.ibb.co/Lh6rgg8/double-tap.png" />
@@ -517,7 +553,7 @@
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25south }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">South</div>
-				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span><br /><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
 					<img class="pulse-hand" src="https://i.ibb.co/Lh6rgg8/double-tap.png" />
@@ -542,7 +578,7 @@
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25east }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">East</div>
-				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span><br /><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
 					<img class="pulse-hand" src="https://i.ibb.co/Lh6rgg8/double-tap.png" />
@@ -567,7 +603,7 @@
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25west }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">West</div>
-				<div class="index-text"><span style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span> <br /> <span style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span> &nbsp;&nbsp; <span style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span></div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span><br /><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
 					<img class="pulse-hand" src="https://i.ibb.co/Lh6rgg8/double-tap.png" />
