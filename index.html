@@ -46,21 +46,20 @@
 
 	<style>
 		body {
-			margin: 10px;
-			padding: 0;
 			font-family: 'Arial', sans-serif;
 			/*animation: fadeIn 1s ease-in-out;*/
 		}
 
 		#app {
+			/*height: 100%;
+			width: 100%;
+			top: 10%;
+			left: 10%;
+			position: absolute; */
+			margin-top: 6.5em;
 			text-align: center;
-			height: 100%;
-			position: absolute;
-			margin-top: 0.5em;
-			top: 60%;
-			left: 50%;
-			-ms-transform: translate(-50%, -50%);
-			transform: translate(-50%, -50%);
+			/* -ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%); */
 			padding: 10px;
 		}
 
@@ -148,7 +147,6 @@
 		.pm25-number {
 			font-size: 15rem;
 			font-weight: bold;
-			width: 530px;
 		}
 
 		.info-text {
@@ -304,14 +302,15 @@
 		.pulse-group {
 			position: relative;
 			bottom: 60px;
-			left: 60px;
-			margin-bottom: 60px;
+			left: 0;
+			width: 400px;
+			margin: 0 auto 60px auto;
 		}
 
 		.pulse-circle {
 			position: absolute;
-			bottom: 32px;
-			left: 26px;
+			bottom: 31px;
+			left: 24px;
 			z-index: 998;
 			width: 30px;
 			height: 30px;
@@ -324,7 +323,7 @@
 			position: absolute;
 			bottom: 0px;
 			left: 0px;
-			width: 12%;
+			/*width: 12%;*/
 			z-index: 999;
 			transform: rotate(45deg);
 			animation: show 8s ease-in-out forwards;
@@ -446,9 +445,7 @@
 		}
 
 		@media only screen and (max-width: 600px) {
-			#app {
-				/**/
-			}
+			#app {}
 
 			.translation-bar {
 				font-size: 0.8em;
@@ -460,8 +457,17 @@
 
 			.psi-number,
 			.pm25-number {
-				font-size: 14rem;
-				width: 500px;
+				font-size: 13rem;
+			}
+			
+			.index-text {
+				font-size: 1.3em;
+			}
+			
+			.region-tag {
+				padding: 0.25em 0.5em;
+				margin: 0.2em;
+				width: 130px;
 			}
 
 			.footer {
@@ -470,9 +476,9 @@
 			}
 
 			.pulse-group {
-				bottom: 60px;
-				left: 55px;
-				margin-bottom: 60px;
+				bottom: 50px;
+				left: -13px;
+				width: 350px;
 			}
 
 			.pulse-circle {
@@ -485,7 +491,7 @@
 			.pulse-hand {
 				bottom: 0px;
 				left: 0px;
-				width: 12%;
+				/*width: 12%;*/
 				margin-bottom: 0px;
 			}
 		}
@@ -498,7 +504,7 @@
 		<div class="togglegroup"><a @click="toggleToPm25"><span id="pm25Tag" class="tag" style="box-shadow: none;">1h PM2.5</span></a><span style="font-weight: bold; color: #505050"></span><a @click="toggleToPsi"><span id="psiTag" class="tag">24h PSI</span></a></div>
 
 		<!-- PREFERENCE SET TO CENTRAL REGION -->
-		<div v-show="preferCentral">
+		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferCentral">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25 }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
@@ -506,7 +512,7 @@
 				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span><br /><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
-					<img class="pulse-hand" src="https://i.ibb.co/Lh6rgg8/double-tap.png" />
+					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
@@ -523,7 +529,7 @@
 		</div>
 
 		<!-- PREFERENCE SET TO NORTH REGION -->
-		<div v-show="preferNorth">
+		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferNorth">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25north }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
@@ -531,7 +537,7 @@
 				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span><br /><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
-					<img class="pulse-hand" src="https://i.ibb.co/Lh6rgg8/double-tap.png" />
+					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
@@ -548,7 +554,7 @@
 		</div>
 
 		<!-- PREFERENCE SET TO SOUTH REGION -->
-		<div v-show="preferSouth">
+		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferSouth">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25south }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
@@ -556,7 +562,7 @@
 				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span><br /><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
-					<img class="pulse-hand" src="https://i.ibb.co/Lh6rgg8/double-tap.png" />
+					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
@@ -573,7 +579,7 @@
 		</div>
 
 		<!-- PREFERENCE SET TO EAST REGION -->
-		<div v-show="preferEast">
+		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferEast">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25east }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
@@ -581,7 +587,7 @@
 				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span><br /><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('west')">West - {{ pm25west }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
-					<img class="pulse-hand" src="https://i.ibb.co/Lh6rgg8/double-tap.png" />
+					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
@@ -598,7 +604,7 @@
 		</div>
 
 		<!-- PREFERENCE SET TO WEST REGION -->
-		<div v-show="preferWest">
+		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferWest">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25west }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
@@ -606,7 +612,7 @@
 				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('north')">North - {{ pm25north }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('south')">South - {{ pm25south }}</span><br /><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('east')">East - {{ pm25east }}</span><span class="region-tag" style="cursor: pointer;" @click="toggleRegion('central')">Central - {{ pm25 }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
-					<img class="pulse-hand" src="https://i.ibb.co/Lh6rgg8/double-tap.png" />
+					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
@@ -622,10 +628,14 @@
 			</div>
 		</div>
 
-		<div v-show="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in-right">
+		<!-- PSI page -->
+		<div v-show="showPSI" v-touch:swipe.left="onSwipeLeftItem" :class="getPsiBackgroundColor(psi)" class="fade-in-right">
 			<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 			<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psi }}<span>&nbsp;</span></div>
 			<div class="time-box">Updated at {{ psitime }}</div>
+			<!-- <p class="output">Current Touch Event:
+				<span class="event">{{ name }}</span>
+			</p> -->
 			<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
 			<div class="box">
 				<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
@@ -669,6 +679,7 @@
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.8/vue.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue2-touch-events@3.2.3/index.min.js"></script>
 	<script>
 		new Vue({
 			el: '#app',
@@ -688,6 +699,7 @@
 				preferSouth: false,
 				preferEast: false,
 				preferWest: false,
+				name: "none",
 			},
 			created() {
 				this.fetchAirQualityData();
@@ -702,6 +714,18 @@
 				this.getPm25Advisory()
 			},
 			methods: {
+				nameCurrentEvent(name) {
+					this.name = name;
+					console.log(name);
+				},
+				onSwipeLeftItem() {
+					this.name = "swiped left";
+					this.toggleToPm25();
+				},
+				onSwipeRightItem() {
+					this.name = "swiped right";
+					this.toggleToPsi();
+				},
 				fetchAirQualityData() {
 					// https://api.data.gov.sg/v1/environment/psi
 					fetch('https://api.data.gov.sg/v1/environment/psi')
