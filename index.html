@@ -29,7 +29,8 @@
 	<meta name="apple-mobile-web-app-title" content="PSI.SG 🇸🇬">
 	<meta name="mobile-web-app-capable" content="yes">
 	<!-- <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/cCGkG0S/psisg-icon-180px.png"> -->
-	<link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/8sxpngb/psisg-logo1-180px.png">
+	<!-- <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/8sxpngb/psisg-logo1-180px.png"> -->
+	<link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/z5sH3Wf/psisg-logo2-3.png">
 	<!-- <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/cN4xnxF/psisg-icon-32px.png"> -->
 	<!-- <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/cN4xnxF/psisg-icon-32px.png"> -->
 	<link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/T0JSPjD/psisg-icon2-32px.png">
@@ -59,7 +60,7 @@
 			top: 10%;
 			left: 10%;
 			position: absolute; */
-			margin-top: 6.5em;
+			margin-top: 5.5em;
 			text-align: center;
 			/* -ms-transform: translate(-50%, -50%);
 			transform: translate(-50%, -50%); */
@@ -142,7 +143,7 @@
 			padding: 1em 2em;
 			border-radius: 5px;
 			max-width: 300px;
-			margin: 0 auto 3em auto;
+			margin: 0 auto 4em auto;
 			font-size: 0.8em;
 		}
 
@@ -296,7 +297,7 @@
 			/* background-color: #505050; */
 			border-radius: 50%;
 			display: inline-block;
-			margin: 0 5px 2em 5px;
+			margin: 0 5px 0 5px;
 			vertical-align: middle;
 			cursor: pointer;
 			opacity: 0.6;
@@ -307,7 +308,7 @@
 			bottom: 60px;
 			left: 0;
 			width: 400px;
-			margin: 0 auto 60px auto;
+			margin: 0 auto 1em auto;
 		}
 
 		.pulse-circle {
@@ -448,7 +449,9 @@
 		}
 
 		@media only screen and (max-width: 600px) {
-			#app {}
+			#app {
+				margin-top: 4em;
+			}
 
 			.translation-bar {
 				font-size: 0.8em;
@@ -517,8 +520,8 @@
 					<div class="pulse-circle"></div>
 					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
-				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
+				<p class="time-box">Updated at {{ pm25time }}</p>
 				<div class="box">
 					<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
 					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
@@ -635,11 +638,11 @@
 		<div v-show="showPSI" v-touch:swipe.right="onSwipeRightItem" :class="getPsiBackgroundColor(psi)" class="fade-in-right">
 			<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 			<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psi }}<span>&nbsp;</span></div>
+			<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
 			<div class="time-box">Updated at {{ psitime }}</div>
 			<!-- <p class="output">Current Touch Event:
 				<span class="event">{{ name }}</span>
 			</p> -->
-			<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
 			<div class="box">
 				<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
 				<p>Use the 24h PSI forecast to plan your activities for <strong>tomorrow</strong>.</p>
@@ -654,7 +657,7 @@
 		————————————————
 		<br /><br />
 		<div class="footer">
-			<p>Made by <a href="https://buymeacoffee.com/jasonleowsg" style="color: inherit !important" target="_blank">@jasonleowsg</a>.If you like this, please support more community projects by buying me a coffee &#9660;&#xFE0E;</p>
+			<p> &#9660;&#xFE0E; Made by <a href="https://buymeacoffee.com/jasonleowsg" style="color: inherit !important" target="_blank">@jasonleowsg</a>.If you like this, please support more community projects by buying me a coffee</p>
 			<br />
 			<a href="https://www.buymeacoffee.com/jasonleowsg" target="_blank" style="border-color: #eee !important;"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 42px !important;width: 150px !important"></a>
 		</div>
