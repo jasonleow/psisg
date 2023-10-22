@@ -39,8 +39,12 @@
 	<!-- <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/T0JSPjD/psisg-icon2-32px.png"> -->
 	<!-- <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/4KL6BDz/psisg-favicon2-32px.png"> -->
 	<!-- <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/4KL6BDz/psisg-favicon2-32px.png"> -->
-	<link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/m6rxGN8/psisg-favicon3-32px.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/m6rxGN8/psisg-favicon3-32px.png">
+	<!-- <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/m6rxGN8/psisg-favicon3-32px.png"> -->
+	<!-- <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/m6rxGN8/psisg-favicon3-32px.png"> -->
+	<link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/zxhwVkv/psisg-favicon4-32px.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/zxhwVkv/psisg-favicon4-32px.png">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-2EG7RX1FNM"></script>
@@ -73,9 +77,28 @@
 			padding: 10px;
 		}
 
+		ul {
+			padding-left: 20px;
+		}
+
+		.no-bullets ul {
+			padding-left: 0;
+			list-style-type: none;
+		}
+
 		.slide-left {
 			transform: translateX(-100%);
 			transition: transform 0.5s ease-in-out;
+		}
+
+		.slide {
+			transform: translateX(-100%);
+			/* Slide Element Y to the left */
+		}
+
+		.slide-in {
+			left: 0;
+			/* Slide Element X in from the right */
 		}
 
 		.fade-in-right {
@@ -471,11 +494,11 @@
 			.pm25-number {
 				font-size: 13rem;
 			}
-			
+
 			.index-text {
 				font-size: 1.3em;
 			}
-			
+
 			.region-tag {
 				padding: 0.25em 0.5em;
 				margin: 0.2em;
@@ -527,14 +550,27 @@
 					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
-				<p class="time-box">Updated at {{ pm25time }}</p>
+				<details class="time-box no-bullets">
+					<summary>Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="margin-top: 1em; text-align: left !important">
+						<p><strong>What do the background colours for the 1h PM2.5 view mean?</strong>
+						<ul>
+							<li><span style="color: #48ffb0">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0 - 55µg/m<sup>3</sup></li>
+							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56 - 150µg/m<sup>3</sup></li>
+							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151 - 250µg/m<sup>3</sup></li>
+							<li><span style="color: #ff5643">&#x25FC;&#xFE0E;</span> Red: Band 4 (Normal) - ≥251µg/m<sup>3</sup></li>
+						</ul>
+						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown on psi.sg are our own interpretation for better UX. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						</p>
+					</div>
+				</details>
 				<div class="box">
-					<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
+					<p><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
 					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
 				</div>
 				<br />
 				<div class="box">
-					<p><strong>&#x26A0;&#xFE0E; Health advisory: What you can do</strong></p>
+					<p><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
 					<div class="info-text">{{ pm25Text }}</div>
 				</div>
 			</div>
@@ -552,14 +588,27 @@
 					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
-				<p class="time-box">Updated at {{ pm25time }}</p>
+				<details class="time-box no-bullets">
+					<summary>Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="margin-top: 1em; text-align: left !important">
+						<p><strong>What do the background colours for the 1h PM2.5 view mean?</strong>
+						<ul>
+							<li><span style="color: #48ffb0">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0 - 55µg/m<sup>3</sup></li>
+							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56 - 150µg/m<sup>3</sup></li>
+							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151 - 250µg/m<sup>3</sup></li>
+							<li><span style="color: #ff5643">&#x25FC;&#xFE0E;</span> Red: Band 4 (Normal) - ≥251µg/m<sup>3</sup></li>
+						</ul>
+						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown on psi.sg are our own interpretation for better UX. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						</p>
+					</div>
+				</details>
 				<div class="box">
-					<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
+					<p><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
 					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
 				</div>
 				<br />
 				<div class="box">
-					<p><strong>&#x26A0;&#xFE0E; Health advisory: What you can do</strong></p>
+					<p><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
 					<div class="info-text">{{ pm25Text }}</div>
 				</div>
 			</div>
@@ -577,14 +626,27 @@
 					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
-				<p class="time-box">Updated at {{ pm25time }}</p>
+				<details class="time-box no-bullets">
+					<summary>Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="margin-top: 1em; text-align: left !important">
+						<p><strong>What do the background colours for the 1h PM2.5 view mean?</strong>
+						<ul>
+							<li><span style="color: #48ffb0">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0 - 55µg/m<sup>3</sup></li>
+							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56 - 150µg/m<sup>3</sup></li>
+							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151 - 250µg/m<sup>3</sup></li>
+							<li><span style="color: #ff5643">&#x25FC;&#xFE0E;</span> Red: Band 4 (Normal) - ≥251µg/m<sup>3</sup></li>
+						</ul>
+						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown on psi.sg are our own interpretation for better UX. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						</p>
+					</div>
+				</details>
 				<div class="box">
-					<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
+					<p><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
 					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
 				</div>
 				<br />
 				<div class="box">
-					<p><strong>&#x26A0;&#xFE0E; Health advisory: What you can do</strong></p>
+					<p><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
 					<div class="info-text">{{ pm25Text }}</div>
 				</div>
 			</div>
@@ -602,14 +664,27 @@
 					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
-				<p class="time-box">Updated at {{ pm25time }}</p>
+				<details class="time-box no-bullets">
+					<summary>Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="margin-top: 1em; text-align: left !important">
+						<p><strong>What do the background colours for the 1h PM2.5 view mean?</strong>
+						<ul>
+							<li><span style="color: #48ffb0">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0 - 55µg/m<sup>3</sup></li>
+							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56 - 150µg/m<sup>3</sup></li>
+							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151 - 250µg/m<sup>3</sup></li>
+							<li><span style="color: #ff5643">&#x25FC;&#xFE0E;</span> Red: Band 4 (Normal) - ≥251µg/m<sup>3</sup></li>
+						</ul>
+						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown on psi.sg are our own interpretation for better UX. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						</p>
+					</div>
+				</details>
 				<div class="box">
-					<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
+					<p><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
 					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
 				</div>
 				<br />
 				<div class="box">
-					<p><strong>&#x26A0;&#xFE0E; Health advisory: What you can do</strong></p>
+					<p><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
 					<div class="info-text">{{ pm25Text }}</div>
 				</div>
 			</div>
@@ -627,14 +702,27 @@
 					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
-				<p class="time-box">Updated at {{ pm25time }}</p>
+				<details class="time-box no-bullets">
+					<summary>Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="margin-top: 1em; text-align: left !important">
+						<p><strong>What do the background colours for the 1h PM2.5 view mean?</strong>
+						<ul>
+							<li><span style="color: #48ffb0">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0 - 55µg/m<sup>3</sup></li>
+							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56 - 150µg/m<sup>3</sup></li>
+							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151 - 250µg/m<sup>3</sup></li>
+							<li><span style="color: #ff5643">&#x25FC;&#xFE0E;</span> Red: Band 4 (Normal) - ≥251µg/m<sup>3</sup></li>
+						</ul>
+						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown on psi.sg are our own interpretation for better UX. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						</p>
+					</div>
+				</details>
 				<div class="box">
-					<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
+					<p><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
 					<p>Use the 1h PM2.5 readings to decide on <strong>immediate</strong> activities you're planning to do <strong>right now</strong>, like going for a jog.</p>
 				</div>
 				<br />
 				<div class="box">
-					<p><strong>&#x26A0;&#xFE0E; Health advisory: What you can do</strong></p>
+					<p><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
 					<div class="info-text">{{ pm25Text }}</div>
 				</div>
 			</div>
@@ -645,17 +733,31 @@
 			<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 			<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psi }}<span>&nbsp;</span></div>
 			<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
-			<div class="time-box">Updated at {{ psitime }}</div>
+			<details class="time-box no-bullets">
+					<summary>Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="margin-top: 1em; text-align: left !important">
+						<p><strong>What do the background colours for the 24h PSI view mean?</strong>
+						<ul>
+							<li><span style="color: #2FA451">&#x25FC;&#xFE0E;</span> Green: 0 - 50</li>
+							<li><span style="color: #0298D6">&#x25FC;&#xFE0E;</span> Blue: 51 - 100</li>
+							<li><span style="color: #FFAC30">&#x25FC;&#xFE0E;</span> Yellow: 101 - 200</li>
+							<li><span style="color: #F79434">&#x25FC;&#xFE0E;</span> Orange: 201 - 300</li>
+							<li><span style="color: #E11B2C">&#x25FC;&#xFE0E;</span> Red: ≥300</li>
+						</ul>
+						<strong>Note:</strong> The background colours for the 24h PSI readings follows the colour banding used by the National Environment Agency. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						</p>
+					</div>
+				</details>
 			<!-- <p class="output">Current Touch Event:
 				<span class="event">{{ name }}</span>
 			</p> -->
 			<div class="box">
-				<p><strong>&#x24D8;&#xFE0E; How to use this reading:</strong></p>
+				<p><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
 				<p>Use the 24h PSI forecast to plan your activities for <strong>tomorrow</strong>.</p>
 			</div>
 			<br />
 			<div class="box">
-				<p><strong>&#x26A0;&#xFE0E; Health advisory: What you can do</strong></p>
+				<p><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
 				<div class="info-text">{{ psiText }}</div>
 			</div>
 		</div>
@@ -669,7 +771,7 @@
 		</div>
 		<br /><br /><br />
 		<details class="footer">
-			<summary>Add this web app to your phone's home screen! Here's how:</summary>
+			<summary>Add this web app to your phone's home screen! Here's how: <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
 			<div class="box" style="margin-top: 1em; text-align: left !important">
 				<p><strong>iOS</strong>
 				<ul>
@@ -797,15 +899,17 @@
 					document.body.classList.add(this.getPsiBackgroundColor(this.psi));
 				},
 				toggleToPsi() {
-					this.showPSI = true;
-					this.showPm25 = false;
-					document.body.classList.remove(this.getPm25BackgroundColor(this.pm25));
-					document.body.classList.add(this.getPsiBackgroundColor(this.psi));
-					document.getElementById('pm25Tag').style.opacity = 0.7;
-					document.getElementById('psiTag').style.opacity = 1;
-					document.getElementById('pm25Tag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
-					document.getElementById('psiTag').style.boxShadow = "none";
-					this.fetchAirQualityData()
+					setTimeout(() => {
+						this.showPSI = true;
+						this.showPm25 = false;
+						document.body.classList.remove(this.getPm25BackgroundColor(this.pm25));
+						document.body.classList.add(this.getPsiBackgroundColor(this.psi));
+						document.getElementById('pm25Tag').style.opacity = 0.7;
+						document.getElementById('psiTag').style.opacity = 1;
+						document.getElementById('pm25Tag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
+						document.getElementById('psiTag').style.boxShadow = "none";
+						this.fetchAirQualityData();
+					}, 10);
 				},
 				toggleToPm25() {
 					this.showPSI = false;
@@ -816,7 +920,7 @@
 					document.getElementById('pm25Tag').style.opacity = 1;
 					document.getElementById('psiTag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
 					document.getElementById('pm25Tag').style.boxShadow = "none";
-					this.fetchAirQualityData()
+					this.fetchAirQualityData();
 				},
 				getPsiAdvisory() {
 					if (this.psi <= 50) {
