@@ -168,13 +168,27 @@
 			max-width: 300px;
 			margin: auto;
 		}
+		
+		.box ul li {
+			margin: 0.3em 0;
+		}
+		
+		/* .box ul li span {
+			position: absolute;
+			margin: 5px 0 0 -9px;
+		} */
 
 		.time-box {
 			padding: 1em 2em;
 			border-radius: 5px;
-			max-width: 300px;
-			margin: 0 auto 4em auto;
+			max-width: 400px;
+			margin: 0 auto 0 auto;
 			font-size: 0.8em;
+		}
+		
+		.time-box .box {
+			padding: 0.8em 2em 1.2em 2.5em;
+			max-width: 305px;
 		}
 
 		.psi-number,
@@ -490,6 +504,14 @@
 			.box {
 				max-width: 250px;
 			}
+			
+			.time-box .box {
+				/**/	
+			}
+			
+			.box ul li {
+				margin: 1em 0;
+			}
 
 			.psi-number,
 			.pm25-number {
@@ -551,17 +573,17 @@
 					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
-				<details class="time-box no-bullets">
-					<summary>Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
-					<div class="box" style="margin-top: 1em; text-align: left !important">
+				<details class="no-bullets" style="margin-bottom: 1.2em;">
+					<summary class="time-box">Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="text-align: left !important">
 						<p><strong>What do the background colours for the 1h PM2.5 view mean?</strong>
 						<ul>
-							<li><span style="color: #48ffb0">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0 - 55µg/m<sup>3</sup></li>
-							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56 - 150µg/m<sup>3</sup></li>
-							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151 - 250µg/m<sup>3</sup></li>
+							<li><span style="color: #48ffb0;">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0-55µg/m<sup>3</sup></li>
+							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56-150µg/m<sup>3</sup></li>
+							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151-250µg/m<sup>3</sup></li>
 							<li><span style="color: #ff5643">&#x25FC;&#xFE0E;</span> Red: Band 4 (Normal) - ≥251µg/m<sup>3</sup></li>
 						</ul>
-						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown on psi.sg are our own interpretation for better UX. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown here on psi.sg are our own addition for a better user experience. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
 						</p>
 					</div>
 				</details>
@@ -589,17 +611,17 @@
 					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
-				<details class="time-box no-bullets">
-					<summary>Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
-					<div class="box" style="margin-top: 1em; text-align: left !important">
+				<details class="no-bullets" style="margin-bottom: 1.2em;">
+					<summary class="time-box">Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="text-align: left !important">
 						<p><strong>What do the background colours for the 1h PM2.5 view mean?</strong>
 						<ul>
-							<li><span style="color: #48ffb0">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0 - 55µg/m<sup>3</sup></li>
-							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56 - 150µg/m<sup>3</sup></li>
-							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151 - 250µg/m<sup>3</sup></li>
+							<li><span style="color: #48ffb0;">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0-55µg/m<sup>3</sup></li>
+							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56-150µg/m<sup>3</sup></li>
+							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151-250µg/m<sup>3</sup></li>
 							<li><span style="color: #ff5643">&#x25FC;&#xFE0E;</span> Red: Band 4 (Normal) - ≥251µg/m<sup>3</sup></li>
 						</ul>
-						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown on psi.sg are our own interpretation for better UX. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown here on psi.sg are our own addition for a better user experience. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
 						</p>
 					</div>
 				</details>
@@ -627,17 +649,17 @@
 					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
-				<details class="time-box no-bullets">
-					<summary>Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
-					<div class="box" style="margin-top: 1em; text-align: left !important">
+				<details class="no-bullets" style="margin-bottom: 1.2em;">
+					<summary class="time-box">Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="text-align: left !important">
 						<p><strong>What do the background colours for the 1h PM2.5 view mean?</strong>
 						<ul>
-							<li><span style="color: #48ffb0">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0 - 55µg/m<sup>3</sup></li>
-							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56 - 150µg/m<sup>3</sup></li>
-							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151 - 250µg/m<sup>3</sup></li>
+							<li><span style="color: #48ffb0;">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0-55µg/m<sup>3</sup></li>
+							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56-150µg/m<sup>3</sup></li>
+							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151-250µg/m<sup>3</sup></li>
 							<li><span style="color: #ff5643">&#x25FC;&#xFE0E;</span> Red: Band 4 (Normal) - ≥251µg/m<sup>3</sup></li>
 						</ul>
-						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown on psi.sg are our own interpretation for better UX. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown here on psi.sg are our own addition for a better user experience. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
 						</p>
 					</div>
 				</details>
@@ -665,17 +687,17 @@
 					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
-				<details class="time-box no-bullets">
-					<summary>Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
-					<div class="box" style="margin-top: 1em; text-align: left !important">
+				<details class="no-bullets" style="margin-bottom: 1.2em;">
+					<summary class="time-box">Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="text-align: left !important">
 						<p><strong>What do the background colours for the 1h PM2.5 view mean?</strong>
 						<ul>
-							<li><span style="color: #48ffb0">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0 - 55µg/m<sup>3</sup></li>
-							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56 - 150µg/m<sup>3</sup></li>
-							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151 - 250µg/m<sup>3</sup></li>
+							<li><span style="color: #48ffb0;">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0-55µg/m<sup>3</sup></li>
+							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56-150µg/m<sup>3</sup></li>
+							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151-250µg/m<sup>3</sup></li>
 							<li><span style="color: #ff5643">&#x25FC;&#xFE0E;</span> Red: Band 4 (Normal) - ≥251µg/m<sup>3</sup></li>
 						</ul>
-						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown on psi.sg are our own interpretation for better UX. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown here on psi.sg are our own addition for a better user experience. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
 						</p>
 					</div>
 				</details>
@@ -703,17 +725,17 @@
 					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
-				<details class="time-box no-bullets">
-					<summary>Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
-					<div class="box" style="margin-top: 1em; text-align: left !important">
+				<details class="no-bullets" style="margin-bottom: 1.2em;">
+					<summary class="time-box">Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="text-align: left !important">
 						<p><strong>What do the background colours for the 1h PM2.5 view mean?</strong>
 						<ul>
-							<li><span style="color: #48ffb0">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0 - 55µg/m<sup>3</sup></li>
-							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56 - 150µg/m<sup>3</sup></li>
-							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151 - 250µg/m<sup>3</sup></li>
+							<li><span style="color: #48ffb0;">&#x25FC;&#xFE0E;</span> Green: Band 1 (Normal) - 0-55µg/m<sup>3</sup></li>
+							<li><span style="color: #34adfd">&#x25FC;&#xFE0E;</span> Blue: Band 2 (Elevated) - 56-150µg/m<sup>3</sup></li>
+							<li><span style="color: #fff51b">&#x25FC;&#xFE0E;</span> Yellow: Band 3 (High) - 151-250µg/m<sup>3</sup></li>
 							<li><span style="color: #ff5643">&#x25FC;&#xFE0E;</span> Red: Band 4 (Normal) - ≥251µg/m<sup>3</sup></li>
 						</ul>
-						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown on psi.sg are our own interpretation for better UX. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						<strong>Note:</strong> The National Environment Agency does not use these colours for PM2.5 readings. The colours shown here on psi.sg are our own addition for a better user experience. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
 						</p>
 					</div>
 				</details>
@@ -734,18 +756,18 @@
 			<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 			<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psi }}<span>&nbsp;</span></div>
 			<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
-			<details class="time-box no-bullets">
-					<summary>Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
-					<div class="box" style="margin-top: 1em; text-align: left !important">
+			<details class="no-bullets" style="margin-bottom: 1.2em;">
+					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="text-align: left !important">
 						<p><strong>What do the background colours for the 24h PSI view mean?</strong>
 						<ul>
-							<li><span style="color: #2FA451">&#x25FC;&#xFE0E;</span> Green: 0 - 50</li>
-							<li><span style="color: #0298D6">&#x25FC;&#xFE0E;</span> Blue: 51 - 100</li>
-							<li><span style="color: #FFAC30">&#x25FC;&#xFE0E;</span> Yellow: 101 - 200</li>
-							<li><span style="color: #F79434">&#x25FC;&#xFE0E;</span> Orange: 201 - 300</li>
-							<li><span style="color: #E11B2C">&#x25FC;&#xFE0E;</span> Red: ≥300</li>
+							<li><span style="color: #2FA451;">&#x25FC;&#xFE0E;</span> Green: 0-50</li>
+							<li><span style="color: #0298D6;">&#x25FC;&#xFE0E;</span> Blue: 51-100</li>
+							<li><span style="color: #FFAC30;">&#x25FC;&#xFE0E;</span> Yellow: 101-200</li>
+							<li><span style="color: #F79434;">&#x25FC;&#xFE0E;</span> Orange: 201-300</li>
+							<li><span style="color: #E11B2C;">&#x25FC;&#xFE0E;</span> Red: ≥300</li>
 						</ul>
-						<strong>Note:</strong> The background colours for the 24h PSI readings follows the colour banding used by the National Environment Agency. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						<strong>Note:</strong> The background colours for the 24h PSI readings here on psi.sg follows the colour banding used by the National Environment Agency. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
 						</p>
 					</div>
 				</details>
