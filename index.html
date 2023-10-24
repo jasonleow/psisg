@@ -611,7 +611,7 @@
 		</div>
 
 		<!-- PREFERENCE SET TO NORTH REGION -->
-		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferNorth">
+		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferNorth" :class="{ 'slide-left': showSlide }" class="sliding">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25north }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
@@ -650,7 +650,7 @@
 		</div>
 
 		<!-- PREFERENCE SET TO SOUTH REGION -->
-		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferSouth">
+		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferSouth" :class="{ 'slide-left': showSlide }" class="sliding">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25south }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
@@ -689,7 +689,7 @@
 		</div>
 
 		<!-- PREFERENCE SET TO EAST REGION -->
-		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferEast">
+		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferEast" :class="{ 'slide-left': showSlide }" class="sliding">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25east }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
@@ -728,7 +728,7 @@
 		</div>
 
 		<!-- PREFERENCE SET TO WEST REGION -->
-		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferWest">
+		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferWest" :class="{ 'slide-left': showSlide }" class="sliding">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25west }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
