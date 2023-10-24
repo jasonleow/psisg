@@ -89,18 +89,13 @@
 		}
 
 		.slide-left {
-			transform: translateX(-100%);
-			transition: transform 0.5s ease-in-out;
+			transform: translateX(-200%);
+			transition: transform 0.8s ease;
 		}
 
-		.slide {
-			transform: translateX(-100%);
-			/* Slide Element Y to the left */
-		}
-
-		.slide-in {
-			left: 0;
-			/* Slide Element X in from the right */
+		.slide-right {
+			transform: translateX(200%);
+			transition: transform 0.8s ease;
 		}
 
 		.fade-in-right {
@@ -577,7 +572,7 @@
 		<div class="togglegroup"><a @click="toggleToPm25"><span id="pm25Tag" class="tag" style="box-shadow: none;">1h PM2.5</span></a><span style="font-weight: bold; color: #505050"></span><a @click="toggleToPsi"><span id="psiTag" class="tag">24h PSI</span></a></div>
 
 		<!-- PREFERENCE SET TO CENTRAL REGION -->
-		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferCentral">
+		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferCentral" :class="{ 'slide-left': showSlide }" class="sliding">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25 }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
@@ -772,37 +767,39 @@
 		</div>
 
 		<!-- PSI page -->
-		<div v-show="showPSI" v-touch:swipe.right="onSwipeRightItem" :class="getPsiBackgroundColor(psi)" class="fade-in-right">
-			<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
-			<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psi }}<span>&nbsp;</span></div>
-			<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
-			<details class="no-bullets" style="margin-bottom: 1.2em;">
-				<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
-				<div class="box" style="text-align: left !important">
-					<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
-					<div class="info-text">
-						<ul>
-							<li><span style="color: #2FA451;">&#x25FC;&#xFE0E;</span> Green: Good - 0-50</li>
-							<li><span style="color: #0298D6;">&#x25FC;&#xFE0E;</span> Blue: Moderate - 51-100</li>
-							<li><span style="color: #FFAC30;">&#x25FC;&#xFE0E;</span> Yellow: Unhealthy - 101-200</li>
-							<li><span style="color: #F79434;">&#x25FC;&#xFE0E;</span> Orange: Very unhealthy - 201-300</li>
-							<li><span style="color: #E11B2C;">&#x25FC;&#xFE0E;</span> Red: Hazardous - ≥300</li>
-						</ul>
-						<strong>Note:</strong> The background colours for the 24h PSI readings here on psi.sg follows the colour banding used by the National Environment Agency. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+		<div v-touch:swipe.right="onSwipeRightItem" :class="{ 'slide-right': !showSlide }" class="sliding">
+			<div v-show="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in-right">
+				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
+				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psi }}<span>&nbsp;</span></div>
+				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
+				<details class="no-bullets" style="margin-bottom: 1.2em;">
+					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box" style="text-align: left !important">
+						<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
+						<div class="info-text">
+							<ul>
+								<li><span style="color: #2FA451;">&#x25FC;&#xFE0E;</span> Green: Good - 0-50</li>
+								<li><span style="color: #0298D6;">&#x25FC;&#xFE0E;</span> Blue: Moderate - 51-100</li>
+								<li><span style="color: #FFAC30;">&#x25FC;&#xFE0E;</span> Yellow: Unhealthy - 101-200</li>
+								<li><span style="color: #F79434;">&#x25FC;&#xFE0E;</span> Orange: Very unhealthy - 201-300</li>
+								<li><span style="color: #E11B2C;">&#x25FC;&#xFE0E;</span> Red: Hazardous - ≥300</li>
+							</ul>
+							<strong>Note:</strong> The background colours for the 24h PSI readings here on psi.sg follows the colour banding used by the National Environment Agency. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						</div>
 					</div>
-				</div>
-			</details>
-			<!-- <p class="output">Current Touch Event:
+				</details>
+				<!-- <p class="output">Current Touch Event:
 				<span class="event">{{ name }}</span>
 			</p> -->
-			<div class="box">
-				<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
-				<div class="info-text">{{ psiText }}</div>
-			</div>
-			<br />
-			<div class="box">
-				<p class="box-header"><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
-				<div class="info-text">Use the 24h PSI forecast to plan your outdoor activities for <strong>tomorrow</strong>, like going to the beach.</div>
+				<div class="box">
+					<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
+					<div class="info-text">{{ psiText }}</div>
+				</div>
+				<br />
+				<div class="box">
+					<p class="box-header"><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
+					<div class="info-text">Use the 24h PSI forecast to plan your outdoor activities for <strong>tomorrow</strong>, like going to the beach.</div>
+				</div>
 			</div>
 		</div>
 		<br /><br />
@@ -857,6 +854,7 @@
 				preferEast: false,
 				preferWest: false,
 				name: "none",
+				showSlide: false,
 			},
 			created() {
 				this.fetchAirQualityData();
@@ -871,6 +869,9 @@
 				this.getPm25Advisory()
 			},
 			methods: {
+				toggleOverlay() {
+					this.showOverlay = true;
+				},
 				nameCurrentEvent(name) {
 					this.name = name;
 					console.log(name);
@@ -942,6 +943,7 @@
 					document.body.classList.add(this.getPsiBackgroundColor(this.psi));
 				},
 				toggleToPsi() {
+					this.showSlide = true;
 					setTimeout(() => {
 						this.showPSI = true;
 						this.showPm25 = false;
@@ -952,18 +954,21 @@
 						document.getElementById('pm25Tag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
 						document.getElementById('psiTag').style.boxShadow = "none";
 						this.fetchAirQualityData();
-					}, 10);
+					}, 200);
 				},
 				toggleToPm25() {
-					this.showPSI = false;
-					this.showPm25 = true;
-					document.body.classList.remove(this.getPsiBackgroundColor(this.psi));
-					document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
-					document.getElementById('psiTag').style.opacity = 0.7;
-					document.getElementById('pm25Tag').style.opacity = 1;
-					document.getElementById('psiTag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
-					document.getElementById('pm25Tag').style.boxShadow = "none";
-					this.fetchAirQualityData();
+					this.showSlide = false;
+					setTimeout(() => {
+						this.showPSI = false;
+						this.showPm25 = true;
+						document.body.classList.remove(this.getPsiBackgroundColor(this.psi));
+						document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
+						document.getElementById('psiTag').style.opacity = 0.7;
+						document.getElementById('pm25Tag').style.opacity = 1;
+						document.getElementById('psiTag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
+						document.getElementById('pm25Tag').style.boxShadow = "none";
+						this.fetchAirQualityData();
+					}, 200);
 				},
 				getPsiAdvisory() {
 					if (this.psi <= 50) {
