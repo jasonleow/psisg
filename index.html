@@ -771,6 +771,7 @@
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in-right">
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psi }}<span>&nbsp;</span></div>
+				<div class="index-text">National</div>
 				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
 					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
