@@ -1214,7 +1214,7 @@
 					setTimeout(() => {
 						this.showPSI = true;
 						this.showPm25 = false;
-						document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred', 'green', 'blue', 'yellow', 'orange', 'red');
+						document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred');
 						//document.body.classList.add(this.getPsiBackgroundColor(this.psi));
 						this.setPsiRegion();
 						document.getElementById('pm25Tag').style.opacity = 0.7;
@@ -1229,7 +1229,7 @@
 					setTimeout(() => {
 						this.showPSI = false;
 						this.showPm25 = true;
-						document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred', 'green', 'blue', 'yellow', 'orange', 'red');
+						document.body.classList.remove('green', 'blue', 'yellow', 'orange', 'red');
 						//document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
 						this.setRegion();
 						document.getElementById('psiTag').style.opacity = 0.7;
