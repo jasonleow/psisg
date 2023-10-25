@@ -216,6 +216,7 @@
 		.index-text {
 			font-size: 1.5em;
 			margin: 0 auto 1.5em auto;
+			max-width: 400px;
 		}
 
 		.footer {
@@ -571,7 +572,7 @@
 	<div id="app">
 		<div class="togglegroup"><a @click="toggleToPm25"><span id="pm25Tag" class="tag" style="box-shadow: none;">1h PM2.5</span></a><span style="font-weight: bold; color: #505050"></span><a @click="toggleToPsi"><span id="psiTag" class="tag">24h PSI</span></a></div>
 
-		<!-- PREFERENCE SET TO CENTRAL REGION -->
+		<!-- PREFERENCE SET TO PM2.5 CENTRAL REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferCentral" :class="{ 'slide-left': showSlide }" class="sliding">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
@@ -600,7 +601,7 @@
 				</details>
 				<div class="box">
 					<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
-					<div class="info-text">{{ pm25Text }}</div>
+					<div class="info-text">{{ getPm25Advisory(pm25) }}</div>
 				</div>
 				<br />
 				<div class="box">
@@ -610,9 +611,9 @@
 			</div>
 		</div>
 
-		<!-- PREFERENCE SET TO NORTH REGION -->
+		<!-- PREFERENCE SET TO PM2.5 NORTH REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferNorth" :class="{ 'slide-left': showSlide }" class="sliding">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25north)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25north }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">North</div>
@@ -639,7 +640,7 @@
 				</details>
 				<div class="box">
 					<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
-					<div class="info-text">{{ pm25Text }}</div>
+					<div class="info-text">{{ getPm25Advisory(pm25north) }}</div>
 				</div>
 				<br />
 				<div class="box">
@@ -649,9 +650,9 @@
 			</div>
 		</div>
 
-		<!-- PREFERENCE SET TO SOUTH REGION -->
+		<!-- PREFERENCE SET TO PM2.5 SOUTH REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferSouth" :class="{ 'slide-left': showSlide }" class="sliding">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25south)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25south }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">South</div>
@@ -678,7 +679,7 @@
 				</details>
 				<div class="box">
 					<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
-					<div class="info-text">{{ pm25Text }}</div>
+					<div class="info-text">{{ getPm25Advisory(pm25south) }}</div>
 				</div>
 				<br />
 				<div class="box">
@@ -688,9 +689,9 @@
 			</div>
 		</div>
 
-		<!-- PREFERENCE SET TO EAST REGION -->
+		<!-- PREFERENCE SET TO PM2.5 EAST REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferEast" :class="{ 'slide-left': showSlide }" class="sliding">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25east)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25east }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">East</div>
@@ -717,7 +718,7 @@
 				</details>
 				<div class="box">
 					<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
-					<div class="info-text">{{ pm25Text }}</div>
+					<div class="info-text">{{ getPm25Advisory(pm25east) }}</div>
 				</div>
 				<br />
 				<div class="box">
@@ -727,9 +728,9 @@
 			</div>
 		</div>
 
-		<!-- PREFERENCE SET TO WEST REGION -->
+		<!-- PREFERENCE SET TO PM2.5 WEST REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferWest" :class="{ 'slide-left': showSlide }" class="sliding">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
+			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25west)" class="fade-in-left">
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25west }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">West</div>
@@ -756,7 +757,7 @@
 				</details>
 				<div class="box">
 					<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
-					<div class="info-text">{{ pm25Text }}</div>
+					<div class="info-text">{{ getPm25Advisory(pm25west) }}</div>
 				</div>
 				<br />
 				<div class="box">
@@ -766,12 +767,17 @@
 			</div>
 		</div>
 
-		<!-- PSI page -->
-		<div v-touch:swipe.right="onSwipeRightItem" :class="{ 'slide-right': !showSlide }" class="sliding">
+		<!-- PREFERENCE SET TO PSI NATIONAL -->
+		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiNational" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in-right">
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psi }}<span>&nbsp;</span></div>
 				<div class="index-text">National</div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
+				<div class="pulse-group">
+					<div class="pulse-circle"></div>
+					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
+				</div>
 				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
 					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
@@ -794,7 +800,7 @@
 			</p> -->
 				<div class="box">
 					<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
-					<div class="info-text">{{ psiText }}</div>
+					<div class="info-text">{{ getPsiAdvisory(psi) }}</div>
 				</div>
 				<br />
 				<div class="box">
@@ -803,6 +809,207 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- PREFERENCE SET TO PSI CENTRAL REGION -->
+		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiCentral" :class="{ 'slide-right': !showSlide }" class="sliding">
+			<div v-show="showPSI" :class="getPsiBackgroundColor(psicentral)" class="fade-in-right">
+				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
+				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psicentral }}<span>&nbsp;</span></div>
+				<div class="index-text">Central</div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('national')">National - {{ psi }}</span></div>
+				<div class="pulse-group">
+					<div class="pulse-circle"></div>
+					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
+				</div>
+				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
+				<details class="no-bullets" style="margin-bottom: 1.2em;">
+					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box">
+						<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
+						<div class="info-text" style="text-align: left !important">
+							<ul>
+								<li><span style="color: #2FA451;">&#x25FC;&#xFE0E;</span> Green: Good - 0-50</li>
+								<li><span style="color: #0298D6;">&#x25FC;&#xFE0E;</span> Blue: Moderate - 51-100</li>
+								<li><span style="color: #FFAC30;">&#x25FC;&#xFE0E;</span> Yellow: Unhealthy - 101-200</li>
+								<li><span style="color: #F79434;">&#x25FC;&#xFE0E;</span> Orange: Very unhealthy - 201-300</li>
+								<li><span style="color: #E11B2C;">&#x25FC;&#xFE0E;</span> Red: Hazardous - ≥300</li>
+							</ul>
+							<strong>Note:</strong> The background colours for the 24h PSI readings here on psi.sg follows the colour banding used by the National Environment Agency. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						</div>
+					</div>
+				</details>
+				<div class="box">
+					<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
+					<div class="info-text">{{ getPsiAdvisory(psicentral) }}</div>
+				</div>
+				<br />
+				<div class="box">
+					<p class="box-header"><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
+					<div class="info-text">Use the 24h PSI forecast to plan your outdoor activities for <strong>tomorrow</strong>, like going to the beach.</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- PREFERENCE SET TO PSI NORTH REGION -->
+		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiNorth" :class="{ 'slide-right': !showSlide }" class="sliding">
+			<div v-show="showPSI" :class="getPsiBackgroundColor(psinorth)" class="fade-in-right">
+				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
+				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psinorth }}<span>&nbsp;</span></div>
+				<div class="index-text">North</div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('national')">National - {{ psi }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
+				<div class="pulse-group">
+					<div class="pulse-circle"></div>
+					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
+				</div>
+				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
+				<details class="no-bullets" style="margin-bottom: 1.2em;">
+					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box">
+						<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
+						<div class="info-text" style="text-align: left !important">
+							<ul>
+								<li><span style="color: #2FA451;">&#x25FC;&#xFE0E;</span> Green: Good - 0-50</li>
+								<li><span style="color: #0298D6;">&#x25FC;&#xFE0E;</span> Blue: Moderate - 51-100</li>
+								<li><span style="color: #FFAC30;">&#x25FC;&#xFE0E;</span> Yellow: Unhealthy - 101-200</li>
+								<li><span style="color: #F79434;">&#x25FC;&#xFE0E;</span> Orange: Very unhealthy - 201-300</li>
+								<li><span style="color: #E11B2C;">&#x25FC;&#xFE0E;</span> Red: Hazardous - ≥300</li>
+							</ul>
+							<strong>Note:</strong> The background colours for the 24h PSI readings here on psi.sg follows the colour banding used by the National Environment Agency. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						</div>
+					</div>
+				</details>
+				<div class="box">
+					<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
+					<div class="info-text">{{ getPsiAdvisory(psinorth) }}</div>
+				</div>
+				<br />
+				<div class="box">
+					<p class="box-header"><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
+					<div class="info-text">Use the 24h PSI forecast to plan your outdoor activities for <strong>tomorrow</strong>, like going to the beach.</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- PREFERENCE SET TO PSI SOUTH REGION -->
+		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiSouth" :class="{ 'slide-right': !showSlide }" class="sliding">
+			<div v-show="showPSI" :class="getPsiBackgroundColor(psisouth)" class="fade-in-right">
+				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
+				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psisouth }}<span>&nbsp;</span></div>
+				<div class="index-text">South</div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('national')">National - {{ psi }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
+				<div class="pulse-group">
+					<div class="pulse-circle"></div>
+					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
+				</div>
+				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
+				<details class="no-bullets" style="margin-bottom: 1.2em;">
+					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box">
+						<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
+						<div class="info-text" style="text-align: left !important">
+							<ul>
+								<li><span style="color: #2FA451;">&#x25FC;&#xFE0E;</span> Green: Good - 0-50</li>
+								<li><span style="color: #0298D6;">&#x25FC;&#xFE0E;</span> Blue: Moderate - 51-100</li>
+								<li><span style="color: #FFAC30;">&#x25FC;&#xFE0E;</span> Yellow: Unhealthy - 101-200</li>
+								<li><span style="color: #F79434;">&#x25FC;&#xFE0E;</span> Orange: Very unhealthy - 201-300</li>
+								<li><span style="color: #E11B2C;">&#x25FC;&#xFE0E;</span> Red: Hazardous - ≥300</li>
+							</ul>
+							<strong>Note:</strong> The background colours for the 24h PSI readings here on psi.sg follows the colour banding used by the National Environment Agency. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						</div>
+					</div>
+				</details>
+				<div class="box">
+					<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
+					<div class="info-text">{{ getPsiAdvisory(psisouth) }}</div>
+				</div>
+				<br />
+				<div class="box">
+					<p class="box-header"><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
+					<div class="info-text">Use the 24h PSI forecast to plan your outdoor activities for <strong>tomorrow</strong>, like going to the beach.</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- PREFERENCE SET TO PSI EAST REGION -->
+		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiEast" :class="{ 'slide-right': !showSlide }" class="sliding">
+			<div v-show="showPSI" :class="getPsiBackgroundColor(psieast)" class="fade-in-right">
+				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
+				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psieast }}<span>&nbsp;</span></div>
+				<div class="index-text">East</div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('national')">National - {{ psi }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
+				<div class="pulse-group">
+					<div class="pulse-circle"></div>
+					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
+				</div>
+				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
+				<details class="no-bullets" style="margin-bottom: 1.2em;">
+					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box">
+						<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
+						<div class="info-text" style="text-align: left !important">
+							<ul>
+								<li><span style="color: #2FA451;">&#x25FC;&#xFE0E;</span> Green: Good - 0-50</li>
+								<li><span style="color: #0298D6;">&#x25FC;&#xFE0E;</span> Blue: Moderate - 51-100</li>
+								<li><span style="color: #FFAC30;">&#x25FC;&#xFE0E;</span> Yellow: Unhealthy - 101-200</li>
+								<li><span style="color: #F79434;">&#x25FC;&#xFE0E;</span> Orange: Very unhealthy - 201-300</li>
+								<li><span style="color: #E11B2C;">&#x25FC;&#xFE0E;</span> Red: Hazardous - ≥300</li>
+							</ul>
+							<strong>Note:</strong> The background colours for the 24h PSI readings here on psi.sg follows the colour banding used by the National Environment Agency. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						</div>
+					</div>
+				</details>
+				<div class="box">
+					<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
+					<div class="info-text">{{ getPsiAdvisory(psieast) }}</div>
+				</div>
+				<br />
+				<div class="box">
+					<p class="box-header"><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
+					<div class="info-text">Use the 24h PSI forecast to plan your outdoor activities for <strong>tomorrow</strong>, like going to the beach.</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- PREFERENCE SET TO PSI WEST REGION -->
+		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiWest" :class="{ 'slide-right': !showSlide }" class="sliding">
+			<div v-show="showPSI" :class="getPsiBackgroundColor(psiwest)" class="fade-in-right">
+				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
+				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psiwest }}<span>&nbsp;</span></div>
+				<div class="index-text">West</div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('national')">National - {{ psi }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
+				<div class="pulse-group">
+					<div class="pulse-circle"></div>
+					<img class="pulse-hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
+				</div>
+				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
+				<details class="no-bullets" style="margin-bottom: 1.2em;">
+					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<div class="box">
+						<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
+						<div class="info-text" style="text-align: left !important">
+							<ul>
+								<li><span style="color: #2FA451;">&#x25FC;&#xFE0E;</span> Green: Good - 0-50</li>
+								<li><span style="color: #0298D6;">&#x25FC;&#xFE0E;</span> Blue: Moderate - 51-100</li>
+								<li><span style="color: #FFAC30;">&#x25FC;&#xFE0E;</span> Yellow: Unhealthy - 101-200</li>
+								<li><span style="color: #F79434;">&#x25FC;&#xFE0E;</span> Orange: Very unhealthy - 201-300</li>
+								<li><span style="color: #E11B2C;">&#x25FC;&#xFE0E;</span> Red: Hazardous - ≥300</li>
+							</ul>
+							<strong>Note:</strong> The background colours for the 24h PSI readings here on psi.sg follows the colour banding used by the National Environment Agency. For more info, see <a href="https://www.haze.gov.sg/" target="_blank">haze.gov.sg</a>
+						</div>
+					</div>
+				</details>
+				<div class="box">
+					<p class="box-header"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Health advisory: What you can do</strong></p>
+					<div class="info-text">{{ getPsiAdvisory(psiwest) }}</div>
+				</div>
+				<br />
+				<div class="box">
+					<p class="box-header"><strong><i class="fa fa-wrench" aria-hidden="true"></i> How to use this reading:</strong></p>
+					<div class="info-text">Use the 24h PSI forecast to plan your outdoor activities for <strong>tomorrow</strong>, like going to the beach.</div>
+				</div>
+			</div>
+		</div>
+		
 		<br /><br />
 		————————————————
 		<br /><br />
@@ -840,6 +1047,11 @@
 			el: '#app',
 			data: {
 				psi: 0,
+				psicentral: 0,
+				psinorth: 0,
+				psisouth: 0,
+				psieast: 0,
+				psiwest: 0,
 				pm25: 0,
 				pm25north: 0,
 				pm25south: 0,
@@ -847,13 +1059,19 @@
 				pm25west: 0,
 				showPm25: true,
 				showPSI: false,
-				psiText: '',
-				pm25Text: '',
+				//psiText: '',
+				//pm25Text: '',
 				preferCentral: true,
 				preferNorth: false,
 				preferSouth: false,
 				preferEast: false,
 				preferWest: false,
+				preferPsiNational: true,
+				preferPsiCentral: false,
+				preferPsiNorth: false,
+				preferPsiSouth: false,
+				preferPsiEast: false,
+				preferPsiWest: false,
 				name: "none",
 				showSlide: false,
 			},
@@ -863,12 +1081,13 @@
 				// setInterval(this.fetchAirQualityData, 60000); // Update every minute 
 			},
 			mounted() {
-				this.detectAppOpened()
-				this.setRegion()
-				this.changePm25BackgroundColor()
-				// this.changePsiBackgroundColor()
-				this.getPsiAdvisory()
-				this.getPm25Advisory()
+				this.detectAppOpened();
+				this.setRegion();
+				this.setPsiRegion();
+				//this.changePm25BackgroundColor();
+				//this.changePsiBackgroundColor();
+				this.getPsiAdvisory();
+				this.getPm25Advisory();
 			},
 			methods: {
 				detectAppOpened() {
@@ -882,16 +1101,19 @@
 					});
 				},
 				// the below function is no longer in use. Reload browser is better than refreshing the data because sometimes the app doesn't reflect new features
-				/* detectAppOpened() {
+				/*detectAppOpened() {
 					document.addEventListener("visibilitychange", () => {
 						if (document.visibilityState === "visible") {
-							this.refresh();
-							console.log("location.reload")
+							this.toggleToPm25();
+							this.fetchAirQualityData();
+							console.log("this.toggleToPm25()");
+							location.reload(true);
+							console.log("location.reload");
 						} else {
 							// The tab or window is now inactive
 						}
 					});
-				}, */
+				},*/
 				nameCurrentEvent(name) {
 					this.name = name;
 					console.log(name);
@@ -913,6 +1135,11 @@
 							this.psitime = this.getLocaleTimestamp(items.update_timestamp)
 							this.psi = items.readings.psi_twenty_four_hourly.national;
 							console.log("this.psi", this.psi)
+							this.psicentral = items.readings.psi_twenty_four_hourly.central;
+							this.psinorth = items.readings.psi_twenty_four_hourly.north;
+							this.psisouth = items.readings.psi_twenty_four_hourly.south;
+							this.psieast = items.readings.psi_twenty_four_hourly.east;
+							this.psiwest = items.readings.psi_twenty_four_hourly.west;
 						})
 						.catch(error => console.error('Error fetching data:', error));
 					// https://api.data.gov.sg/v1/environment/pm25
@@ -956,19 +1183,40 @@
 					else if (value <= 250) return 'lightyellow';
 					else return 'lightred';
 				},
-				changePm25BackgroundColor() {
-					document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
+				changePm25BackgroundColor(value) {
+					document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred');
+					if (value <= 55) {
+						document.body.classList.add('lightgreen');
+					} else if (value <= 150) {
+						document.body.classList.add('lightblue');
+					} else if (value <= 250) { 
+						document.body.classList.add('lightyellow');
+					} else {
+						document.body.classList.add('lightred');
+					}
 				},
-				changePsiBackgroundColor() {
-					document.body.classList.add(this.getPsiBackgroundColor(this.psi));
+				changePsiBackgroundColor(value) {
+					document.body.classList.remove('green', 'blue', 'yellow', 'orange', 'red');
+					if (value <= 50) {
+						document.body.classList.add('green');
+					} else if (value <= 100) {
+						document.body.classList.add('blue');
+					} else if (value <= 200) { 
+						document.body.classList.add('yellow');
+					} else if (value <= 300) { 
+						document.body.classList.add('orange');
+					} else {
+						document.body.classList.add('red');
+					}
 				},
 				toggleToPsi() {
 					this.showSlide = true;
 					setTimeout(() => {
 						this.showPSI = true;
 						this.showPm25 = false;
-						document.body.classList.remove(this.getPm25BackgroundColor(this.pm25));
-						document.body.classList.add(this.getPsiBackgroundColor(this.psi));
+						document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred', 'green', 'blue', 'yellow', 'orange', 'red');
+						//document.body.classList.add(this.getPsiBackgroundColor(this.psi));
+						this.setPsiRegion();
 						document.getElementById('pm25Tag').style.opacity = 0.7;
 						document.getElementById('psiTag').style.opacity = 1;
 						document.getElementById('pm25Tag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
@@ -981,8 +1229,9 @@
 					setTimeout(() => {
 						this.showPSI = false;
 						this.showPm25 = true;
-						document.body.classList.remove(this.getPsiBackgroundColor(this.psi));
-						document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
+						document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred', 'green', 'blue', 'yellow', 'orange', 'red');
+						//document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
+						this.setRegion();
 						document.getElementById('psiTag').style.opacity = 0.7;
 						document.getElementById('pm25Tag').style.opacity = 1;
 						document.getElementById('psiTag').style.boxShadow = "2px 2px rgba(0,0,0,0.2)";
@@ -990,31 +1239,31 @@
 						this.fetchAirQualityData();
 					}, 200);
 				},
-				getPsiAdvisory() {
-					if (this.psi <= 50) {
-						this.psiText = 'Normal activities.';
-					} else if (this.psi <= 100) {
-						this.psiText = 'Normal activities.';
-					} else if (this.psi <= 200) {
-						this.psiText = 'Do less of prolonged or strenous outdoor exertion. Vulnerable persons – do not do strenuous outdoor activity for the next hour.';
-					} else if (this.psi <= 300) {
-						this.psiText = 'Do not do prolonged or strenous outdoor exertion. Vulnerable persons – do not do all outdoor activity for the next hour.';
+				getPsiAdvisory(value) {
+					if (value <= 50) {
+						return 'Normal activities.';
+					} else if (value <= 100) {
+						return 'Normal activities.';
+					} else if (value <= 200) {
+						return 'Do less of prolonged or strenous outdoor exertion. Vulnerable persons – do not do strenuous outdoor activity for the next hour.';
+					} else if (value <= 300) {
+						return 'Do not do prolonged or strenous outdoor exertion. Vulnerable persons – do not do all outdoor activity for the next hour.';
 					} else {
-						this.psiText = 'Do as little as possible all outdoor activity. Vulnerable persons – do not do all outdoor activity for the next hour.';
+						return 'Do as little as possible all outdoor activity. Vulnerable persons – do not do all outdoor activity for the next hour.';
 					}
-					console.log('toggle to this.psi', this.psi)
+					console.log('toggle to regional psi', value)
 				},
-				getPm25Advisory() {
-					if (this.pm25 <= 55) {
-						this.pm25Text = 'Continue with normal activities.';
-					} else if (this.psi <= 150) {
-						this.pm25Text = 'Do less strenuous outdoor activity for the next hour. Vulnerable persons – Do not do strenuous outdoor activity for the next hour.';
-					} else if (this.psi <= 250) {
-						this.pm25Text = 'Do not do strenuous outdoor activity for the next hour. Vulnerable persons – do not do all outdoor activity for the next hour.';
+				getPm25Advisory(value) {
+					if (value <= 55) {
+						return 'Continue with normal activities.';
+					} else if (value <= 150) {
+						return 'Do less strenuous outdoor activity for the next hour. Vulnerable persons – Do not do strenuous outdoor activity for the next hour.';
+					} else if (value <= 250) {
+						return 'Do not do strenuous outdoor activity for the next hour. Vulnerable persons – do not do all outdoor activity for the next hour.';
 					} else {
-						this.pm25Text = 'Do as little as possible all outdoor activity for the next hour. Vulnerable persons – do not do all outdoor activity for the next hour.';
+						return 'Do as little as possible all outdoor activity for the next hour. Vulnerable persons – do not do all outdoor activity for the next hour.';
 					}
-					console.log('toggle to this.pm25', this.pm25)
+					console.log('toggle to regional pm25 value', value)
 				},
 				/* agetPm25Advisory() {
 					if (value <= 55) return 'lightgreen';
@@ -1024,7 +1273,7 @@
 				}, */
 				refresh() {
 					this.fetchAirQualityData();
-					document.body.classList.add('fade-out-in', true)
+					document.body.classList.add('fade-out-in')
 					setTimeout(function() {
 						document.body.classList.remove('fade-out-in')
 					}, 1000);
@@ -1039,6 +1288,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('central'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+						this.changePm25BackgroundColor(this.pm25);
 					} else if (r == 'north') {
 						this.preferCentral = false;
 						this.preferNorth = true
@@ -1048,6 +1298,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('north'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+						this.changePm25BackgroundColor(this.pm25north);
 					} else if (r == 'south') {
 						this.preferNorth = false;
 						this.preferSouth = true
@@ -1057,6 +1308,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('south'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+						this.changePm25BackgroundColor(this.pm25south);
 					} else if (r == 'east') {
 						this.preferNorth = false;
 						this.preferSouth = false;
@@ -1066,6 +1318,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('east'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+						this.changePm25BackgroundColor(this.pm25east);
 					} else if (r == 'west') {
 						this.preferNorth = false;
 						this.preferSouth = false;
@@ -1075,6 +1328,7 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('west'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+						this.changePm25BackgroundColor(this.pm25west);
 					} else {
 						// 
 					}
@@ -1091,42 +1345,191 @@
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('central'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+						this.changePm25BackgroundColor(this.pm25);
 					} else if (regionPreference == 'north') {
 						this.preferCentral = false;
-						this.preferNorth = true
+						this.preferNorth = true;
 						this.preferSouth = false;
 						this.preferEast = false;
 						this.preferWest = false;
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('north'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+						this.changePm25BackgroundColor(this.pm25north);
 					} else if (regionPreference == 'south') {
 						this.preferNorth = false;
-						this.preferSouth = true
+						this.preferSouth = true;
 						this.preferCentral = false;
 						this.preferEast = false;
 						this.preferWest = false;
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('south'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+						this.changePm25BackgroundColor(this.pm25south);
 					} else if (regionPreference == 'east') {
 						this.preferNorth = false;
 						this.preferSouth = false;
 						this.preferCentral = false;
-						this.preferEast = true
+						this.preferEast = true;
 						this.preferWest = false;
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('east'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+						this.changePm25BackgroundColor(this.pm25east);
 					} else if (regionPreference == 'west') {
 						this.preferNorth = false;
 						this.preferSouth = false;
 						this.preferEast = false;
-						this.preferWest = true
+						this.preferWest = true;
 						this.preferCentral = false;
 						localStorage.removeItem('regionPreference');
 						localStorage.setItem('regionPreference', JSON.stringify('west'));
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+						this.changePm25BackgroundColor(this.pm25west);
+					} else {
+						// 
+					}
+				},
+				togglePsiRegion(r) {
+					if (r == 'central') {
+						this.preferPsiCentral = true;
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = false;
+						this.preferPsiNational = false;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('central'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psicentral)
+					} else if (r == 'north') {
+						this.preferPsiCentral = false;
+						this.preferPsiNorth = true;
+						this.preferPsiSouth = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = false;
+						this.preferPsiNational = false;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('north'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psinorth)
+					} else if (r == 'south') {
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = true;
+						this.preferPsiCentral = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = false;
+						this.preferPsiNational = false;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('south'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psisouth)
+					} else if (r == 'east') {
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = false;
+						this.preferPsiCentral = false;
+						this.preferPsiEast = true;
+						this.preferPsiWest = false;
+						this.preferPsiNational = false;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('east'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psieast)
+					} else if (r == 'west') {
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = true;
+						this.preferPsiCentral = false;
+						this.preferPsiNational = false;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('west'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psiwest)
+					} else if (r == 'national') {
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = false;
+						this.preferPsiCentral = false;
+						this.preferPsiNational = true;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psi)
+					} else {
+						// 
+					}
+				},
+				setPsiRegion() {
+					const psiRegionPreference = JSON.parse(localStorage.getItem('psiRegionPreference'));
+					console.log('psiRegionPreference', psiRegionPreference)
+					if (psiRegionPreference == 'central') {
+						this.preferPsiCentral = true;
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = false;
+						this.preferPsiNational = false;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('central'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psicentral)
+					} else if (psiRegionPreference == 'north') {
+						this.preferPsiCentral = false;
+						this.preferPsiNorth = true;
+						this.preferPsiSouth = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = false;
+						this.preferPsiNational = false;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('north'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psinorth)
+					} else if (psiRegionPreference == 'south') {
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = true;
+						this.preferPsiCentral = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = false;
+						this.preferPsiNational = false;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('south'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psisouth)
+					} else if (psiRegionPreference == 'east') {
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = false;
+						this.preferPsiCentral = false;
+						this.preferPsiEast = true;
+						this.preferPsiWest = false;
+						this.preferPsiNational = false;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('east'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psieast)
+					} else if (psiRegionPreference == 'west') {
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = true;
+						this.preferPsiCentral = false; 
+						this.preferPsiNational = false;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('west'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psiwest)
+					} else if (psiRegionPreference == 'national') {
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = false;
+						this.preferPsiCentral = false;
+						this.preferPsiNational = true;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psi)
 					} else {
 						// 
 					}
