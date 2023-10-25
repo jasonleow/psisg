@@ -862,6 +862,7 @@
 				// setInterval(this.fetchAirQualityData, 60000); // Update every minute 
 			},
 			mounted() {
+				this.detectAppOpened()
 				this.setRegion()
 				this.changePm25BackgroundColor()
 				// this.changePsiBackgroundColor()
@@ -869,8 +870,14 @@
 				this.getPm25Advisory()
 			},
 			methods: {
-				toggleOverlay() {
-					this.showOverlay = true;
+				detectAppOpened() {
+					document.addEventListener("visibilitychange", () => {
+						if (document.visibilityState === "visible") {
+							this.refresh();
+						} else {
+							// The tab or window is now inactive
+						}
+					});
 				},
 				nameCurrentEvent(name) {
 					this.name = name;
