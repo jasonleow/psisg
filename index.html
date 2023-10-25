@@ -872,14 +872,26 @@
 			},
 			methods: {
 				detectAppOpened() {
-					document.addEventListener("visibilitychange", () => {
+					document.addEventListener("visibilitychange", function() {
 						if (document.visibilityState === "visible") {
-							this.refresh();
+							location.reload(true);
+							console.log("location.reload")
 						} else {
 							// The tab or window is now inactive
 						}
 					});
 				},
+				// the below function is no longer in use. Reload browser is better than refreshing the data because sometimes the app doesn't reflect new features
+				/* detectAppOpened() {
+					document.addEventListener("visibilitychange", () => {
+						if (document.visibilityState === "visible") {
+							this.refresh();
+							console.log("location.reload")
+						} else {
+							// The tab or window is now inactive
+						}
+					});
+				}, */
 				nameCurrentEvent(name) {
 					this.name = name;
 					console.log(name);
