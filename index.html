@@ -89,16 +89,36 @@
 		}
 
 		.slide-left {
+			-webkit-transform: translateX(-200%);
+			-moz-transform: translateX(-200%);
+			-ms-transform: translateX(-200%);
+			-o-transform: translateX(-200%);
 			transform: translateX(-200%);
+			-webkit-transition: transform 0.8s ease;
+			-moz-transition: transform 0.8s ease;
+			-ms-transition: transform 0.8s ease;
+			-o-transition: transform 0.8s ease;
 			transition: transform 0.8s ease;
 		}
 
 		.slide-right {
+			-webkit-transform: translateX(200%);
+			-moz-transform: translateX(200%);
+			-ms-transform: translateX(200%);
+			-o-transform: translateX(200%);
 			transform: translateX(200%);
+			-webkit-transition: transform 0.8s ease;
+			-moz-transition: transform 0.8s ease;
+			-ms-transition: transform 0.8s ease;
+			-o-transition: transform 0.8s ease;
 			transition: transform 0.8s ease;
 		}
 
 		.fade-in-right {
+			-webkit-animation: fadeInRight 0.8s ease-in-out;
+			-moz-animation: fadeInRight 0.8s ease-in-out;
+			-ms-animation: fadeInRight 0.8s ease-in-out;
+			-o-animation: fadeInRight 0.8s ease-in-out;
 			animation: fadeInRight 0.8s ease-in-out;
 		}
 
@@ -114,7 +134,59 @@
 			}
 		}
 
+		@-webkit-keyframes fadeInRight {
+			from {
+				opacity: 0;
+				-webkit-transform: translateX(200%);
+			}
+
+			to {
+				opacity: 1;
+				-webkit-transform: translateX(0%);
+			}
+		}
+
+		@-moz-keyframes fadeInRight {
+			from {
+				opacity: 0;
+				-moz-transform: translateX(200%);
+			}
+
+			to {
+				opacity: 1;
+				-moz-transform: translateX(0%);
+			}
+		}
+
+		@-ms-keyframes fadeInRight {
+			from {
+				opacity: 0;
+				-ms-transform: translateX(200%);
+			}
+
+			to {
+				opacity: 1;
+				-ms-transform: translateX(0%);
+			}
+		}
+
+		@-o-keyframes fadeInRight {
+			from {
+				opacity: 0;
+				-o-transform: translateX(200%);
+			}
+
+			to {
+				opacity: 1;
+				-o-transform: translateX(0%);
+			}
+		}
+
 		.fade-in-left {
+			-webkit-animation: fadeInLeft 0.8s ease-in-out;
+			-moz-animation: fadeInLeft 0.8s ease-in-out;
+			-ms-animation: fadeInLeft 0.8s ease-in-out;
+			-o-animation: fadeInLeft 0.8s ease-in-out;
 			animation: fadeInLeft 0.8s ease-in-out;
 		}
 
@@ -130,11 +202,119 @@
 			}
 		}
 
+		@-webkit-keyframes fadeInLeft {
+			from {
+				opacity: 0;
+				-webkit-transform: translateX(-200%);
+			}
+
+			to {
+				opacity: 1;
+				-webkit-transform: translateX(0%);
+			}
+		}
+
+		@-moz-keyframes fadeInLeft {
+			from {
+				opacity: 0;
+				-moz-transform: translateX(-200%);
+			}
+
+			to {
+				opacity: 1;
+				-moz-transform: translateX(0%);
+			}
+		}
+
+		@-ms-keyframes fadeInLeft {
+			from {
+				opacity: 0;
+				-ms-transform: translateX(-200%);
+			}
+
+			to {
+				opacity: 1;
+				-ms-transform: translateX(0%);
+			}
+		}
+
+		@-o-keyframes fadeInLeft {
+			from {
+				opacity: 0;
+				-o-transform: translateX(-200%);
+			}
+
+			to {
+				opacity: 1;
+				-o-transform: translateX(0%);
+			}
+		}
+
 		.fade-out-in {
+			-webkit-animation: fade 0.8s ease-in-out forwards;
+			-moz-animation: fade 0.8s ease-in-out forwards;
+			-ms-animation: fade 0.8s ease-in-out forwards;
+			-o-animation: fade 0.8s ease-in-out forwards;
 			animation: fade 0.8s ease-in-out forwards;
 		}
 
 		@keyframes fade {
+			0% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+
+		@-webkit-keyframes fade {
+			0% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+
+		@-moz-keyframes fade {
+			0% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+
+		@-ms-keyframes fade {
+			0% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+
+		@-o-keyframes fade {
 			0% {
 				opacity: 1;
 			}
@@ -809,7 +989,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- PREFERENCE SET TO PSI CENTRAL REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiCentral" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psicentral)" class="fade-in-right">
@@ -849,7 +1029,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- PREFERENCE SET TO PSI NORTH REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiNorth" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psinorth)" class="fade-in-right">
@@ -889,7 +1069,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- PREFERENCE SET TO PSI SOUTH REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiSouth" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psisouth)" class="fade-in-right">
@@ -929,7 +1109,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- PREFERENCE SET TO PSI EAST REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiEast" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psieast)" class="fade-in-right">
@@ -969,7 +1149,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- PREFERENCE SET TO PSI WEST REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiWest" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psiwest)" class="fade-in-right">
@@ -1009,7 +1189,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<br /><br />
 		————————————————
 		<br /><br />
@@ -1190,7 +1370,7 @@
 						document.body.classList.add('lightgreen');
 					} else if (value <= 150) {
 						document.body.classList.add('lightblue');
-					} else if (value <= 250) { 
+					} else if (value <= 250) {
 						document.body.classList.add('lightyellow');
 					} else {
 						document.body.classList.add('lightred');
@@ -1202,9 +1382,9 @@
 						document.body.classList.add('green');
 					} else if (value <= 100) {
 						document.body.classList.add('blue');
-					} else if (value <= 200) { 
+					} else if (value <= 200) {
 						document.body.classList.add('yellow');
-					} else if (value <= 300) { 
+					} else if (value <= 300) {
 						document.body.classList.add('orange');
 					} else {
 						document.body.classList.add('red');
@@ -1559,7 +1739,7 @@
 						this.preferPsiSouth = false;
 						this.preferPsiEast = false;
 						this.preferPsiWest = true;
-						this.preferPsiCentral = false; 
+						this.preferPsiCentral = false;
 						this.preferPsiNational = false;
 						localStorage.removeItem('psiRegionPreference');
 						localStorage.setItem('psiRegionPreference', JSON.stringify('west'));
