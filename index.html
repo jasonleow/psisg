@@ -1084,6 +1084,7 @@
 				this.detectAppOpened();
 				this.setRegion();
 				this.setPsiRegion();
+				this.initialSetPm25BackgroundColor();
 				//this.changePm25BackgroundColor();
 				//this.changePsiBackgroundColor();
 				this.getPsiAdvisory();
@@ -1209,6 +1210,23 @@
 						document.body.classList.add('red');
 					}
 				},
+				initialSetPm25BackgroundColor() {
+					const regionPreference = JSON.parse(localStorage.getItem('regionPreference'));
+					if (regionPreference == 'central') {
+						this.changePm25BackgroundColor(this.pm25);
+					} else if (regionPreference == 'north') {
+						this.changePm25BackgroundColor(this.pm25north);
+					} else if (regionPreference == 'south') {
+						this.changePm25BackgroundColor(this.pm25south);
+					} else if (regionPreference == 'east') {
+						this.changePm25BackgroundColor(this.pm25east);
+					} else if (regionPreference == 'west') {
+						this.changePm25BackgroundColor(this.pm25west);
+					} else {
+						// if first time visiting which means localStorage is null, then show Central as default
+						this.changePm25BackgroundColor(this.pm25);
+					}
+				},
 				toggleToPsi() {
 					this.showSlide = true;
 					setTimeout(() => {
@@ -1330,7 +1348,16 @@
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
 						this.changePm25BackgroundColor(this.pm25west);
 					} else {
-						// 
+						// if first time visiting, then show Central as default
+						this.preferCentral = true;
+						this.preferNorth = false;
+						this.preferSouth = false;
+						this.preferEast = false;
+						this.preferWest = false;
+						localStorage.removeItem('regionPreference');
+						localStorage.setItem('regionPreference', JSON.stringify('central'));
+						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+						this.changePm25BackgroundColor(this.pm25);
 					}
 				},
 				setRegion() {
@@ -1387,7 +1414,16 @@
 						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
 						this.changePm25BackgroundColor(this.pm25west);
 					} else {
-						// 
+						// if first time visiting, then show Central as default
+						this.preferCentral = true;
+						this.preferNorth = false;
+						this.preferSouth = false;
+						this.preferEast = false;
+						this.preferWest = false;
+						localStorage.removeItem('regionPreference');
+						localStorage.setItem('regionPreference', JSON.stringify('central'));
+						console.log('localStorage - regionPreference', localStorage.getItem('regionPreference'));
+						this.changePm25BackgroundColor(this.pm25);
 					}
 				},
 				togglePsiRegion(r) {
@@ -1458,7 +1494,17 @@
 						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
 						this.changePsiBackgroundColor(this.psi)
 					} else {
-						// 
+						// if first time visiting, then show National as default
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = false;
+						this.preferPsiCentral = false;
+						this.preferPsiNational = true;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psi)
 					}
 				},
 				setPsiRegion() {
@@ -1531,7 +1577,17 @@
 						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
 						this.changePsiBackgroundColor(this.psi)
 					} else {
-						// 
+						// if first time visiting, then show National as default
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = false;
+						this.preferPsiCentral = false;
+						this.preferPsiNational = true;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psi)
 					}
 				},
 			}
