@@ -1372,7 +1372,7 @@
 					fetch('https://api.data.gov.sg/v1/environment/psi')
 						.then(response => response.json())
 						.then(data => {
-							const items = data.items[0];
+							const items = [];//data.items[0];
 							console.log("psi items", items)
 							this.psitime = this.getLocaleTimestamp(items.update_timestamp)
 							this.psi = items.readings.psi_twenty_four_hourly.national;
