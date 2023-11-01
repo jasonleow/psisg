@@ -759,6 +759,10 @@
 		<!-- PREFERENCE SET TO PM2.5 CENTRAL REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferCentral" :class="{ 'slide-left': showSlide }" class="sliding">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
+				<div v-show="pm25ApiDown" class="box" style="margin: -1em auto 3em auto;">
+					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
+					<div class="info-text">Looks like the data source for the PM2.5 readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
+				</div>
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25 }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">Central</div>
@@ -769,7 +773,7 @@
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
-					<summary class="time-box">Updated at {{ pm25time }} <span style="display: inline-block; vertical-align: middle;"><svg :fill="getPm25SvgFillColor(pm25)" width="13px" height="13px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+					<summary class="time-box">Updated at {{ pm25time }}.<br />Source: data.gov.sg <span style="display: inline-block; vertical-align: middle;"><svg :fill="getPm25SvgFillColor(pm25)" width="13px" height="13px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
 								<path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" />
 							</svg></span></summary>
 					<div class="box">
@@ -791,7 +795,7 @@
 				</div>
 				<br />
 				<div class="box">
-					<p class="box-header"><strong><span style="display: inline-block; vertical-align: text-top;"><svg height="0.85em" width="0.85em" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#FFFFFF">
+					<p class="box-header"><strong><span style="display: inline-block; vertical-align: text-top;"><svg height="0.85em" width="0.8em" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#FFFFFF">
 									<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
 									<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
 									<g id="SVGRepo_iconCarrier">
@@ -808,6 +812,10 @@
 		<!-- PREFERENCE SET TO PM2.5 NORTH REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferNorth" :class="{ 'slide-left': showSlide }" class="sliding">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25north)" class="fade-in-left">
+				<div v-show="pm25ApiDown" class="box" style="margin: -1em auto 3em auto;">
+					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
+					<div class="info-text">Looks like the data source for the PM2.5 readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
+				</div>
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25north }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">North</div>
@@ -818,7 +826,7 @@
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
-					<summary class="time-box">Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<summary class="time-box">Updated at {{ pm25time }}.<br />Source: data.gov.sg <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
 					<div class="box">
 						<p class="box-header"><strong>What do the background colours for the 1h PM2.5 view mean?</strong></p>
 						<div class="info-text" style="text-align: left !important">
@@ -847,6 +855,10 @@
 		<!-- PREFERENCE SET TO PM2.5 SOUTH REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferSouth" :class="{ 'slide-left': showSlide }" class="sliding">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25south)" class="fade-in-left">
+				<div v-show="pm25ApiDown" class="box" style="margin: -1em auto 3em auto;">
+					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
+					<div class="info-text">Looks like the data source for the PM2.5 readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
+				</div>
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25south }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">South</div>
@@ -857,7 +869,7 @@
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
-					<summary class="time-box">Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<summary class="time-box">Updated at {{ pm25time }}.<br />Source: data.gov.sg <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
 					<div class="box">
 						<p class="box-header"><strong>What do the background colours for the 1h PM2.5 view mean?</strong></p>
 						<div class="info-text" style="text-align: left !important">
@@ -886,6 +898,10 @@
 		<!-- PREFERENCE SET TO PM2.5 EAST REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferEast" :class="{ 'slide-left': showSlide }" class="sliding">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25east)" class="fade-in-left">
+				<div v-show="pm25ApiDown" class="box" style="margin: -1em auto 3em auto;">
+					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
+					<div class="info-text">Looks like the data source for the PM2.5 readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
+				</div>
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25east }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">East</div>
@@ -896,7 +912,7 @@
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
-					<summary class="time-box">Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<summary class="time-box">Updated at {{ pm25time }}.<br />Source: data.gov.sg <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
 					<div class="box">
 						<p class="box-header"><strong>What do the background colours for the 1h PM2.5 view mean?</strong></p>
 						<div class="info-text" style="text-align: left !important">
@@ -925,6 +941,10 @@
 		<!-- PREFERENCE SET TO PM2.5 WEST REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferWest" :class="{ 'slide-left': showSlide }" class="sliding">
 			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25west)" class="fade-in-left">
+				<div v-show="pm25ApiDown" class="box" style="margin: -1em auto 3em auto;">
+					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
+					<div class="info-text">Looks like the data source for the PM2.5 readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
+				</div>
 				<div style="font-size: 2em">PM2.5<span class="refreshicon" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="pm25-number"><span>&nbsp;</span>{{ pm25west }}<span><a @click="toggleToPsi" style="cursor: pointer;">&nbsp;</a></span></div>
 				<div class="index-text">West</div>
@@ -935,7 +955,7 @@
 				</div>
 				<div class="index-text"><a @click="toggleToPsi"><span class="dot"></span><span class="dot" style="height: 10px; width: 10px;"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
-					<summary class="time-box">Updated at {{ pm25time }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<summary class="time-box">Updated at {{ pm25time }}.<br />Source: data.gov.sg <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
 					<div class="box">
 						<p class="box-header"><strong>What do the background colours for the 1h PM2.5 view mean?</strong></p>
 						<div class="info-text" style="text-align: left !important">
@@ -964,6 +984,10 @@
 		<!-- PREFERENCE SET TO PSI NATIONAL -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiNational" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in-right">
+				<div v-show="psiApiDown" class="box" style="margin: -1em auto 3em auto;">
+					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
+					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
+				</div>
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psi }}<span>&nbsp;</span></div>
 				<div class="index-text">National</div>
@@ -974,7 +998,7 @@
 				</div>
 				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
-					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<summary class="time-box">Updated at {{ psitime }}.<br />Source: data.gov.sg <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
 					<div class="box">
 						<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
 						<div class="info-text" style="text-align: left !important">
@@ -1007,6 +1031,10 @@
 		<!-- PREFERENCE SET TO PSI CENTRAL REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiCentral" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psicentral)" class="fade-in-right">
+				<div v-show="psiApiDown" class="box" style="margin: -1em auto 3em auto;">
+					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
+					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
+				</div>
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psicentral }}<span>&nbsp;</span></div>
 				<div class="index-text">Central</div>
@@ -1017,7 +1045,7 @@
 				</div>
 				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
-					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<summary class="time-box">Updated at {{ psitime }}.<br />Source: data.gov.sg <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
 					<div class="box">
 						<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
 						<div class="info-text" style="text-align: left !important">
@@ -1047,6 +1075,10 @@
 		<!-- PREFERENCE SET TO PSI NORTH REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiNorth" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psinorth)" class="fade-in-right">
+				<div v-show="psiApiDown" class="box" style="margin: -1em auto 3em auto;">
+					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
+					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
+				</div>
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psinorth }}<span>&nbsp;</span></div>
 				<div class="index-text">North</div>
@@ -1057,7 +1089,7 @@
 				</div>
 				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
-					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<summary class="time-box">Updated at {{ psitime }}.<br />Source: data.gov.sg <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
 					<div class="box">
 						<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
 						<div class="info-text" style="text-align: left !important">
@@ -1087,6 +1119,10 @@
 		<!-- PREFERENCE SET TO PSI SOUTH REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiSouth" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psisouth)" class="fade-in-right">
+				<div v-show="psiApiDown" class="box" style="margin: -1em auto 3em auto;">
+					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
+					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
+				</div>
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psisouth }}<span>&nbsp;</span></div>
 				<div class="index-text">South</div>
@@ -1097,7 +1133,7 @@
 				</div>
 				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
-					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<summary class="time-box">Updated at {{ psitime }}.<br />Source: data.gov.sg <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
 					<div class="box">
 						<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
 						<div class="info-text" style="text-align: left !important">
@@ -1127,6 +1163,10 @@
 		<!-- PREFERENCE SET TO PSI EAST REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiEast" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psieast)" class="fade-in-right">
+				<div v-show="psiApiDown" class="box" style="margin: -1em auto 3em auto;">
+					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
+					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
+				</div>
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psieast }}<span>&nbsp;</span></div>
 				<div class="index-text">East</div>
@@ -1137,7 +1177,7 @@
 				</div>
 				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
-					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<summary class="time-box">Updated at {{ psitime }}.<br />Source: data.gov.sg <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
 					<div class="box">
 						<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
 						<div class="info-text" style="text-align: left !important">
@@ -1167,6 +1207,10 @@
 		<!-- PREFERENCE SET TO PSI WEST REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiWest" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psiwest)" class="fade-in-right">
+				<div v-show="psiApiDown" class="box" style="margin: -1em auto 3em auto;">
+					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
+					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
+				</div>
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psiwest }}<span>&nbsp;</span></div>
 				<div class="index-text">West</div>
@@ -1177,7 +1221,7 @@
 				</div>
 				<div class="index-text"><a @click="toggleToPm25"><span class="dot" style="height: 10px; width: 10px;"></span><span class="dot"></span></a></div>
 				<details class="no-bullets" style="margin-bottom: 1.2em;">
-					<summary class="time-box">Updated at {{ psitime }} <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
+					<summary class="time-box">Updated at {{ psitime }}.<br />Source: data.gov.sg <i class="fa fa-info-circle" aria-hidden="true"></i></summary>
 					<div class="box">
 						<p class="box-header"><strong>What do the background colours for the 24h PSI view mean?</strong></p>
 						<div class="info-text" style="text-align: left !important">
@@ -1268,6 +1312,8 @@
 				preferPsiWest: false,
 				name: "none",
 				showSlide: false,
+				pm25ApiDown: false,
+				psiApiDown: false,
 			},
 			created() {
 				this.fetchAirQualityData();
@@ -1327,6 +1373,7 @@
 						.then(response => response.json())
 						.then(data => {
 							const items = data.items[0];
+							console.log("psi items", items)
 							this.psitime = this.getLocaleTimestamp(items.update_timestamp)
 							this.psi = items.readings.psi_twenty_four_hourly.national;
 							console.log("this.psi", this.psi)
@@ -1336,12 +1383,16 @@
 							this.psieast = items.readings.psi_twenty_four_hourly.east;
 							this.psiwest = items.readings.psi_twenty_four_hourly.west;
 						})
-						.catch(error => console.error('Error fetching data:', error));
+						.catch(error => {
+							console.error('Error fetching data:', error);
+							this.psiApiDown = true;
+						});
 					// https://api.data.gov.sg/v1/environment/pm25
 					fetch('https://api.data.gov.sg/v1/environment/pm25')
 						.then(response => response.json())
 						.then(data => {
 							const items = data.items[0];
+							console.log("pm25 items", items)
 							this.pm25time = this.getLocaleTimestamp(items.update_timestamp)
 							console.log("this.pm25time", this.pm25time)
 							this.pm25 = items.readings.pm25_one_hourly.central
@@ -1351,7 +1402,10 @@
 							this.pm25east = items.readings.pm25_one_hourly.east
 							this.pm25west = items.readings.pm25_one_hourly.west
 						})
-						.catch(error => console.error('Error fetching data:', error));
+						.catch(error => {
+							console.error('Error fetching data:', error);
+							this.pm25ApiDown = true;
+						});
 				},
 				getLocaleTimestamp(t) {
 					const localDate = new Date(t).toLocaleDateString("en-SG", {
