@@ -993,7 +993,7 @@
 		<!-- PREFERENCE SET TO PSI NATIONAL -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiNational" :class="{ 'slide-right': !showSlide }" class="sliding">
 			<div v-show="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in-right">
-				<div v-show="psiApiDown" class="box" style="margin: -1em auto 3em auto;">
+				<div v-show="psiApiDown || psiNationalDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
 					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
 				</div>
@@ -1323,7 +1323,13 @@
 				showSlide: false,
 				pm25ApiDown: false,
 				psiApiDown: false,
-				updatedOnce: false,
+				//updatedOnce: false,
+				psiNationalDown: false,
+				psiCentralDown: false,
+				psiNorthDown: false,
+				psiSouthDown: false,
+				psiEastDown: false,
+				psiWestDown: false,
 			},
 			created() {
 				this.fetchAirQualityData();
@@ -1348,11 +1354,18 @@
 				} */
 			},
 			methods: {
+				// unfinished function to show alerts when specific region data is missing/down, not api down 
+				regionDownAlert() {
+					if (this.psi === undefined) {
+						this.psiNationalDown = true;
+					}
+				},
 				detectAppOpened() {
-					document.addEventListener("visibilitychange", function() {
+					document.addEventListener("visibilitychange", () => {
 						if (document.visibilityState === "visible") {
 							location.reload(true);
-							console.log("location.reload")
+							console.log("location.reload");
+							this.initialSetPm25BackgroundColor();
 						} else {
 							// The tab or window is now inactive
 						}
@@ -1390,7 +1403,7 @@
 						.then(response => response.json())
 						.then(data => {
 							const items = data.items[0];
-							console.log("psi items", items)
+							//console.log("psi items", items)
 							this.psitime = this.getLocaleTimestamp(items.update_timestamp)
 							this.psi = items.readings.psi_twenty_four_hourly.national;
 							console.log("this.psi", this.psi)
@@ -1409,7 +1422,7 @@
 						.then(response => response.json())
 						.then(data => {
 							const items = data.items[0];
-							console.log("pm25 items", items)
+							//console.log("pm25 items", items)
 							this.pm25time = this.getLocaleTimestamp(items.update_timestamp)
 							console.log("this.pm25time", this.pm25time)
 							this.pm25 = items.readings.pm25_one_hourly.central
@@ -1437,7 +1450,8 @@
 					return localDate;
 				},
 				getPsiBackgroundColor(value) {
-					if (value === '' || value === " ") return 'grey';
+					if (value === '') return 'grey';
+					else if (value === " ") return 'grey';
 					else if (value <= 50 && value >= 0) return 'green';
 					else if (value <= 100) return 'blue';
 					else if (value <= 200) return 'yellow';
@@ -1446,7 +1460,8 @@
 					else return 'grey';
 				},
 				getPm25BackgroundColor(value) {
-					if (value === '' || value === " ") return 'grey';
+					if (value === '') return 'grey';
+					else if (value === " ") return 'grey';
 					else if (value <= 55 && value >= 0) return 'lightgreen';
 					else if (value <= 150) return 'lightblue';
 					else if (value <= 250) return 'lightyellow';
@@ -1454,7 +1469,8 @@
 					else return 'grey';
 				},
 				getPsiSvgFillColor(value) {
-					if (value === '' || value === " ") return '#000000';
+					if (value === '') return '#000000';
+					else if (value === " ") return '#000000';
 					else if (value <= 50 && value >= 0) return '#FFFFFF';
 					else if (value <= 100) return '#FFFFFF';
 					else if (value <= 200) return '#000000';
@@ -1463,7 +1479,8 @@
 					else return '#000000';
 				},
 				getPm25SvgFillColor(value) {
-					if (value === '' || value === " ") return '#000000';
+					if (value === '') return '#000000';
+					else if (value === " ") return '#000000';
 					else if (value <= 55 && value >= 0) return '#505050';
 					else if (value <= 150) return '#FFFFFF';
 					else if (value <= 250) return '#000000';
@@ -1472,7 +1489,9 @@
 				},
 				changePm25BackgroundColor(value) {
 					document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred', 'grey');
-					if (value === '' || value === " ") {
+					if (value === '') {
+						document.body.classList.add('grey');
+					} else if (value === " ") {
 						document.body.classList.add('grey');
 					} else if (value <= 55 && value >= 0) {
 						document.body.classList.add('lightgreen');
@@ -1488,7 +1507,9 @@
 				},
 				changePsiBackgroundColor(value) {
 					document.body.classList.remove('green', 'blue', 'yellow', 'orange', 'red', 'grey');
-					if (value === '' || value === " ") {
+					if (value === '') {
+						document.body.classList.add('grey');
+					} else if (value === " ") {
 						document.body.classList.add('grey');
 					} else if (value <= 50 && value >= 0) {
 						document.body.classList.add('green');
@@ -1521,7 +1542,7 @@
 							// if first time visiting which means localStorage is null, then show Central as default
 							this.changePm25BackgroundColor(this.pm25);
 						}
-					}, 500);
+					}, 200); // delay has to be 200 otherwise bg of body will be wrong
 				},
 				toggleToPsi() {
 					this.showSlide = true;
@@ -1554,7 +1575,9 @@
 					}, 200);
 				},
 				getPsiAdvisory(value) {
-					if (value === '' || value === " ") {
+					if (value === '') {
+						return 'Health advisory not available.';
+					} else if (value === " ") {
 						return 'Health advisory not available.';
 					} else if (value <= 50 && value >= 0) {
 						return 'Normal activities.';
@@ -1572,7 +1595,9 @@
 					console.log('toggle to regional psi', value)
 				},
 				getPm25Advisory(value) {
-					if (value === '' || value === " ") {
+					if (value === '') {
+						return 'Health advisory not available.';
+					} else if (value === " ") {
 						return 'Health advisory not available.';
 					} else if (value <= 55 && value >= 0) {
 						return 'Continue with normal activities.';
