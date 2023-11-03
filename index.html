@@ -1365,7 +1365,7 @@
 						if (document.visibilityState === "visible") {
 							location.reload(true);
 							console.log("location.reload");
-							//this.initialSetPm25BackgroundColor();
+							this.initialSetPm25BackgroundColor();
 						} else {
 							// The tab or window is now inactive
 						}
@@ -1542,7 +1542,7 @@
 							// if first time visiting which means localStorage is null, then show Central as default
 							this.changePm25BackgroundColor(this.pm25);
 						}
-					}, 200); // delay has to be 200 otherwise bg of body will be wrong
+					}, 500); // delay has to be 500 otherwise bg of body will be wrong
 				},
 				toggleToPsi() {
 					this.showSlide = true;
