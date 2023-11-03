@@ -456,6 +456,15 @@
 			background-color: white;
 		}
 
+		.grey {
+			background-color: #DDDDDD;
+			color: black;
+		}
+
+		.grey .dot {
+			background-color: black;
+		}
+
 		.lightgreen {
 			background-color: #48ffb0;
 			color: #505050;
@@ -1284,17 +1293,17 @@
 		new Vue({
 			el: '#app',
 			data: {
-				psi: 0,
-				psicentral: 0,
-				psinorth: 0,
-				psisouth: 0,
-				psieast: 0,
-				psiwest: 0,
-				pm25: 0,
-				pm25north: 0,
-				pm25south: 0,
-				pm25east: 0,
-				pm25west: 0,
+				psi: '',
+				psicentral: ' ',
+				psinorth: ' ',
+				psisouth: ' ',
+				psieast: ' ',
+				psiwest: ' ',
+				pm25: ' ',
+				pm25north: ' ',
+				pm25south: ' ',
+				pm25east: ' ',
+				pm25west: ' ',
 				showPm25: true,
 				showPSI: false,
 				//psiText: '',
@@ -1314,6 +1323,7 @@
 				showSlide: false,
 				pm25ApiDown: false,
 				psiApiDown: false,
+				updatedOnce: false,
 			},
 			created() {
 				this.fetchAirQualityData();
@@ -1324,11 +1334,18 @@
 				this.detectAppOpened();
 				this.setRegion();
 				this.setPsiRegion();
-				this.initialSetPm25BackgroundColor();
 				//this.changePm25BackgroundColor();
 				//this.changePsiBackgroundColor();
 				this.getPsiAdvisory();
 				this.getPm25Advisory();
+				//this.initialSetPm25BackgroundColor();
+			},
+			updated() {
+				// this runs the setpm25bg function ONLY after the data variables are rendered.
+				if (!this.updatedOnce) {
+					this.initialSetPm25BackgroundColor();
+					this.updatedOnce = true; // to run the setpm25bg function just once instead of every time the DOM updates, cos the updated hook is called every time the component's DOM is updated
+				}
 			},
 			methods: {
 				detectAppOpened() {
@@ -1372,7 +1389,7 @@
 					fetch('https://api.data.gov.sg/v1/environment/psi')
 						.then(response => response.json())
 						.then(data => {
-							const items = [];//data.items[0];
+							const items = data.items[0];
 							console.log("psi items", items)
 							this.psitime = this.getLocaleTimestamp(items.update_timestamp)
 							this.psi = items.readings.psi_twenty_four_hourly.national;
@@ -1420,46 +1437,60 @@
 					return localDate;
 				},
 				getPsiBackgroundColor(value) {
-					if (value <= 50) return 'green';
+					if (value === '' || value === " ") return 'grey';
+					else if (value <= 50 && value >= 0) return 'green';
 					else if (value <= 100) return 'blue';
 					else if (value <= 200) return 'yellow';
 					else if (value <= 300) return 'orange';
-					else return 'red';
+					else if (value > 300) return 'red';
+					else return 'grey';
 				},
 				getPm25BackgroundColor(value) {
-					if (value <= 55) return 'lightgreen';
+					if (value === '' || value === " ") return 'grey';
+					else if (value <= 55 && value >= 0) return 'lightgreen';
 					else if (value <= 150) return 'lightblue';
 					else if (value <= 250) return 'lightyellow';
-					else return 'lightred';
+					else if (value > 250) return 'lightred';
+					else return 'grey';
 				},
 				getPsiSvgFillColor(value) {
-					if (value <= 50) return '#FFFFFF';
+					if (value === '' || value === " ") return '#000000';
+					else if (value <= 50 && value >= 0) return '#FFFFFF';
 					else if (value <= 100) return '#FFFFFF';
 					else if (value <= 200) return '#000000';
 					else if (value <= 300) return '#FFFFFF';
-					else return '#FFFFFF';
+					else if (value > 300) return '#FFFFFF';
+					else return '#000000';
 				},
 				getPm25SvgFillColor(value) {
-					if (value <= 55) return '#505050';
+					if (value === '' || value === " ") return '#000000';
+					else if (value <= 55 && value >= 0) return '#505050';
 					else if (value <= 150) return '#FFFFFF';
 					else if (value <= 250) return '#000000';
-					else return '#FFFFFF';
+					else if (value > 250) return '#FFFFFF';
+					else return '#000000';
 				},
 				changePm25BackgroundColor(value) {
-					document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred');
-					if (value <= 55) {
+					document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred', 'grey');
+					if (value === '' || value === " ") {
+						document.body.classList.add('grey');
+					} else if (value <= 55 && value >= 0) {
 						document.body.classList.add('lightgreen');
 					} else if (value <= 150) {
 						document.body.classList.add('lightblue');
 					} else if (value <= 250) {
 						document.body.classList.add('lightyellow');
-					} else {
+					} else if (value > 250) {
 						document.body.classList.add('lightred');
+					} else {
+						document.body.classList.add('grey');
 					}
 				},
 				changePsiBackgroundColor(value) {
-					document.body.classList.remove('green', 'blue', 'yellow', 'orange', 'red');
-					if (value <= 50) {
+					document.body.classList.remove('green', 'blue', 'yellow', 'orange', 'red', 'grey');
+					if (value === '' || value === " ") {
+						document.body.classList.add('grey');
+					} else if (value <= 50 && value >= 0) {
 						document.body.classList.add('green');
 					} else if (value <= 100) {
 						document.body.classList.add('blue');
@@ -1467,33 +1498,37 @@
 						document.body.classList.add('yellow');
 					} else if (value <= 300) {
 						document.body.classList.add('orange');
-					} else {
+					} else if (value > 300) {
 						document.body.classList.add('red');
+					} else {
+						document.body.classList.add('grey');
 					}
 				},
 				initialSetPm25BackgroundColor() {
 					const regionPreference = JSON.parse(localStorage.getItem('regionPreference'));
-					if (regionPreference == 'central') {
-						this.changePm25BackgroundColor(this.pm25);
-					} else if (regionPreference == 'north') {
-						this.changePm25BackgroundColor(this.pm25north);
-					} else if (regionPreference == 'south') {
-						this.changePm25BackgroundColor(this.pm25south);
-					} else if (regionPreference == 'east') {
-						this.changePm25BackgroundColor(this.pm25east);
-					} else if (regionPreference == 'west') {
-						this.changePm25BackgroundColor(this.pm25west);
-					} else {
-						// if first time visiting which means localStorage is null, then show Central as default
-						this.changePm25BackgroundColor(this.pm25);
-					}
+					setTimeout(() => {
+						if (regionPreference == 'central') {
+							this.changePm25BackgroundColor(this.pm25);
+						} else if (regionPreference == 'north') {
+							this.changePm25BackgroundColor(this.pm25north);
+						} else if (regionPreference == 'south') {
+							this.changePm25BackgroundColor(this.pm25south);
+						} else if (regionPreference == 'east') {
+							this.changePm25BackgroundColor(this.pm25east);
+						} else if (regionPreference == 'west') {
+							this.changePm25BackgroundColor(this.pm25west);
+						} else {
+							// if first time visiting which means localStorage is null, then show Central as default
+							this.changePm25BackgroundColor(this.pm25);
+						}
+					}, 1);
 				},
 				toggleToPsi() {
 					this.showSlide = true;
 					setTimeout(() => {
 						this.showPSI = true;
 						this.showPm25 = false;
-						document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred');
+						document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred', 'grey');
 						//document.body.classList.add(this.getPsiBackgroundColor(this.psi));
 						this.setPsiRegion();
 						document.getElementById('pm25Tag').style.opacity = 0.7;
@@ -1508,7 +1543,7 @@
 					setTimeout(() => {
 						this.showPSI = false;
 						this.showPm25 = true;
-						document.body.classList.remove('green', 'blue', 'yellow', 'orange', 'red');
+						document.body.classList.remove('green', 'blue', 'yellow', 'orange', 'red', 'grey');
 						//document.body.classList.add(this.getPm25BackgroundColor(this.pm25));
 						this.setRegion();
 						document.getElementById('psiTag').style.opacity = 0.7;
@@ -1519,7 +1554,9 @@
 					}, 200);
 				},
 				getPsiAdvisory(value) {
-					if (value <= 50) {
+					if (value === '' || value === " ") {
+						return 'Health advisory not available.';
+					} else if (value <= 50 && value >= 0) {
 						return 'Normal activities.';
 					} else if (value <= 100) {
 						return 'Normal activities.';
@@ -1527,25 +1564,31 @@
 						return 'Do less of prolonged or strenous outdoor exertion. Vulnerable persons – do not do strenuous outdoor activity for the next hour.';
 					} else if (value <= 300) {
 						return 'Do not do prolonged or strenous outdoor exertion. Vulnerable persons – do not do all outdoor activity for the next hour.';
-					} else {
+					} else if (value > 300) {
 						return 'Do as little as possible all outdoor activity. Vulnerable persons – do not do all outdoor activity for the next hour.';
+					} else {
+						return 'Health advisory not available.';
 					}
 					console.log('toggle to regional psi', value)
 				},
 				getPm25Advisory(value) {
-					if (value <= 55) {
+					if (value === '' || value === " ") {
+						return 'Health advisory not available.';
+					} else if (value <= 55 && value >= 0) {
 						return 'Continue with normal activities.';
 					} else if (value <= 150) {
 						return 'Do less strenuous outdoor activity for the next hour. Vulnerable persons – Do not do strenuous outdoor activity for the next hour.';
 					} else if (value <= 250) {
 						return 'Do not do strenuous outdoor activity for the next hour. Vulnerable persons – do not do all outdoor activity for the next hour.';
-					} else {
+					} else if (value > 250) {
 						return 'Do as little as possible all outdoor activity for the next hour. Vulnerable persons – do not do all outdoor activity for the next hour.';
+					} else {
+						return 'Health advisory not available.';
 					}
 					console.log('toggle to regional pm25 value', value)
 				},
 				/* agetPm25Advisory() {
-					if (value <= 55) return 'lightgreen';
+					if (value <= 55 && value >= 0) return 'lightgreen';
 					else if (value <= 150) return 'lightblue';
 					else if (value <= 250) return 'lightyellow';
 					else return 'lightred';
