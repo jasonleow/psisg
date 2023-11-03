@@ -767,7 +767,7 @@
 
 		<!-- PREFERENCE SET TO PM2.5 CENTRAL REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferCentral" :class="{ 'slide-left': showSlide }" class="sliding">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25)" class="fade-in-left">
+			<div v-show="showPm25" class="fade-in-left">
 				<div v-show="pm25ApiDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
 					<div class="info-text">Looks like the data source for the PM2.5 readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
@@ -820,7 +820,7 @@
 
 		<!-- PREFERENCE SET TO PM2.5 NORTH REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferNorth" :class="{ 'slide-left': showSlide }" class="sliding">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25north)" class="fade-in-left">
+			<div v-show="showPm25" class="fade-in-left">
 				<div v-show="pm25ApiDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
 					<div class="info-text">Looks like the data source for the PM2.5 readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
@@ -863,7 +863,7 @@
 
 		<!-- PREFERENCE SET TO PM2.5 SOUTH REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferSouth" :class="{ 'slide-left': showSlide }" class="sliding">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25south)" class="fade-in-left">
+			<div v-show="showPm25" class="fade-in-left">
 				<div v-show="pm25ApiDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
 					<div class="info-text">Looks like the data source for the PM2.5 readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
@@ -906,7 +906,7 @@
 
 		<!-- PREFERENCE SET TO PM2.5 EAST REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferEast" :class="{ 'slide-left': showSlide }" class="sliding">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25east)" class="fade-in-left">
+			<div v-show="showPm25" class="fade-in-left">
 				<div v-show="pm25ApiDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
 					<div class="info-text">Looks like the data source for the PM2.5 readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
@@ -949,7 +949,7 @@
 
 		<!-- PREFERENCE SET TO PM2.5 WEST REGION -->
 		<div v-touch:swipe.left="onSwipeLeftItem" v-show="preferWest" :class="{ 'slide-left': showSlide }" class="sliding">
-			<div v-show="showPm25" :class="getPm25BackgroundColor(pm25west)" class="fade-in-left">
+			<div v-show="showPm25" class="fade-in-left">
 				<div v-show="pm25ApiDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
 					<div class="info-text">Looks like the data source for the PM2.5 readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
@@ -992,7 +992,7 @@
 
 		<!-- PREFERENCE SET TO PSI NATIONAL -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiNational" :class="{ 'slide-right': !showSlide }" class="sliding">
-			<div v-show="showPSI" :class="getPsiBackgroundColor(psi)" class="fade-in-right">
+			<div v-show="showPSI" class="fade-in-right">
 				<div v-show="psiApiDown || psiNationalDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
 					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
@@ -1039,7 +1039,7 @@
 
 		<!-- PREFERENCE SET TO PSI CENTRAL REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiCentral" :class="{ 'slide-right': !showSlide }" class="sliding">
-			<div v-show="showPSI" :class="getPsiBackgroundColor(psicentral)" class="fade-in-right">
+			<div v-show="showPSI" class="fade-in-right">
 				<div v-show="psiApiDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
 					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
@@ -1083,7 +1083,7 @@
 
 		<!-- PREFERENCE SET TO PSI NORTH REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiNorth" :class="{ 'slide-right': !showSlide }" class="sliding">
-			<div v-show="showPSI" :class="getPsiBackgroundColor(psinorth)" class="fade-in-right">
+			<div v-show="showPSI" class="fade-in-right">
 				<div v-show="psiApiDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
 					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
@@ -1127,7 +1127,7 @@
 
 		<!-- PREFERENCE SET TO PSI SOUTH REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiSouth" :class="{ 'slide-right': !showSlide }" class="sliding">
-			<div v-show="showPSI" :class="getPsiBackgroundColor(psisouth)" class="fade-in-right">
+			<div v-show="showPSI" class="fade-in-right">
 				<div v-show="psiApiDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
 					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
@@ -1171,7 +1171,7 @@
 
 		<!-- PREFERENCE SET TO PSI EAST REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiEast" :class="{ 'slide-right': !showSlide }" class="sliding">
-			<div v-show="showPSI" :class="getPsiBackgroundColor(psieast)" class="fade-in-right">
+			<div v-show="showPSI" class="fade-in-right">
 				<div v-show="psiApiDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
 					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
@@ -1215,7 +1215,7 @@
 
 		<!-- PREFERENCE SET TO PSI WEST REGION -->
 		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiWest" :class="{ 'slide-right': !showSlide }" class="sliding">
-			<div v-show="showPSI" :class="getPsiBackgroundColor(psiwest)" class="fade-in-right">
+			<div v-show="showPSI" class="fade-in-right">
 				<div v-show="psiApiDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
 					<div class="info-text">Looks like the data source for the PSI readings is down at the moment. We're working hard to find out when it will be restored. Please check back in a bit.</div>
@@ -1365,7 +1365,7 @@
 						if (document.visibilityState === "visible") {
 							location.reload(true);
 							console.log("location.reload");
-							this.initialSetPm25BackgroundColor();
+							//this.initialSetPm25BackgroundColor();
 						} else {
 							// The tab or window is now inactive
 						}
@@ -1459,6 +1459,34 @@
 					else if (value > 300) return 'red';
 					else return 'grey';
 				},
+				/*getPsiBackgroundColor(value) {
+					document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred', 'grey');
+					if (value === '') {
+						document.body.classList.add('grey');
+						return 'grey';
+					} else if (value === " ") {
+						document.body.classList.add('grey');
+						return 'grey';
+					} else if (value <= 50 && value >= 0) {
+						document.body.classList.add('green');
+						return 'green';
+					} else if (value <= 100) {
+						document.body.classList.add('blue');
+						return 'blue';
+					} else if (value <= 200) {
+						document.body.classList.add('yellow');
+						return 'yellow';
+					} else if (value <= 300) {
+						document.body.classList.add('orange');
+						return 'orange';
+					} else if (value > 300) {
+						document.body.classList.add('red');
+						return 'red';
+					} else {
+						document.body.classList.add('grey');
+						return 'grey';
+					}
+				},*/
 				getPm25BackgroundColor(value) {
 					if (value === '') return 'grey';
 					else if (value === " ") return 'grey';
@@ -1468,6 +1496,31 @@
 					else if (value > 250) return 'lightred';
 					else return 'grey';
 				},
+				/*getPm25BackgroundColor(value) {
+					document.body.classList.remove('green', 'blue', 'yellow', 'orange', 'red', 'grey');
+					if (value === '') {
+						document.body.classList.add('grey');
+						return 'grey';
+					} else if (value === " ") {
+						document.body.classList.add('grey');
+						return 'grey';
+					} else if (value <= 55 && value >= 0) {
+						document.body.classList.add('lightgreen');
+						return 'lightgreen';
+					} else if (value <= 150) {
+						document.body.classList.add('lightblue');
+						return 'lightblue';
+					} else if (value <= 250) {
+						document.body.classList.add('lightyellow');
+						return 'lightyellow';
+					} else if (value > 250) {
+						document.body.classList.add('lightred');
+						return 'lightred';
+					} else {
+						document.body.classList.add('grey');
+						return 'grey';
+					}
+				},*/
 				getPsiSvgFillColor(value) {
 					if (value === '') return '#000000';
 					else if (value === " ") return '#000000';
