@@ -1341,6 +1341,7 @@
 				this.initialSetPm25BackgroundColor();
 			},
 			updated() {
+				this.detectAppOpened();
 				// this runs the setpm25bg function ONLY after the data variables are rendered.
 				/*if (!this.updatedOnce) {
 					this.initialSetPm25BackgroundColor();
