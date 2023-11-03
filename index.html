@@ -1338,14 +1338,14 @@
 				//this.changePsiBackgroundColor();
 				this.getPsiAdvisory();
 				this.getPm25Advisory();
-				//this.initialSetPm25BackgroundColor();
+				this.initialSetPm25BackgroundColor();
 			},
 			updated() {
 				// this runs the setpm25bg function ONLY after the data variables are rendered.
-				if (!this.updatedOnce) {
+				/*if (!this.updatedOnce) {
 					this.initialSetPm25BackgroundColor();
 					this.updatedOnce = true; // to run the setpm25bg function just once instead of every time the DOM updates, cos the updated hook is called every time the component's DOM is updated
-				}
+				} */
 			},
 			methods: {
 				detectAppOpened() {
@@ -1521,7 +1521,7 @@
 							// if first time visiting which means localStorage is null, then show Central as default
 							this.changePm25BackgroundColor(this.pm25);
 						}
-					}, 1);
+					}, 200);
 				},
 				toggleToPsi() {
 					this.showSlide = true;
