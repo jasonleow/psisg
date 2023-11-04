@@ -1346,6 +1346,7 @@
 				this.getPsiAdvisory();
 				this.getPm25Advisory();
 				this.initialSetPm25BackgroundColor();
+				this.leftRightToggle();
 			},
 			updated() {
 				// this runs the setpm25bg function ONLY after the data variables are rendered.
@@ -1360,6 +1361,19 @@
 					if (this.psi === undefined) {
 						this.psiNationalDown = true;
 					}
+				},
+				leftRightToggle() {
+					window.addEventListener('keydown', (e) => {
+						if (e.key == 'ArrowLeft') {
+							this.toggleToPm25();
+							console.log('left arrow key hit')
+						} else if (e.key == 'ArrowRight') {
+							this.toggleToPsi();
+							//this.showPSI = !this.showPSI
+							//this.showPm25 = !this.showPm25
+							console.log('right arrow key hit')
+						}
+					})
 				},
 				detectAppOpened() {
 					document.addEventListener("visibilitychange", () => {
