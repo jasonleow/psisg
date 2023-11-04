@@ -991,7 +991,7 @@
 		</div>
 
 		<!-- PREFERENCE SET TO PSI NATIONAL -->
-		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiNational" :class="{ 'slide-right': !showSlide }" class="sliding">
+		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiNational" :class="{ 'slide-right': !showSlide }" class="sliding" style="display: none;">
 			<div v-show="showPSI" class="fade-in-right">
 				<div v-show="psiApiDown || psiNationalDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
@@ -1047,7 +1047,7 @@
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psicentral }}<span>&nbsp;</span></div>
 				<div class="index-text">Central</div>
-				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('national')">National - {{ psi }}</span></div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer; display: none;" @click="togglePsiRegion('national')">National - {{ psi }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
 					<img class="pulse-hand" alt="click here pointer hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
@@ -1091,7 +1091,7 @@
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psinorth }}<span>&nbsp;</span></div>
 				<div class="index-text">North</div>
-				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('national')">National - {{ psi }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer; display: none;" @click="togglePsiRegion('national')">National - {{ psi }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
 					<img class="pulse-hand" alt="click here pointer hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
@@ -1135,7 +1135,7 @@
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psisouth }}<span>&nbsp;</span></div>
 				<div class="index-text">South</div>
-				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('national')">National - {{ psi }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer; display: none;" @click="togglePsiRegion('national')">National - {{ psi }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
 					<img class="pulse-hand" alt="click here pointer hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
@@ -1179,7 +1179,7 @@
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psieast }}<span>&nbsp;</span></div>
 				<div class="index-text">East</div>
-				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('national')">National - {{ psi }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer; display: none;" @click="togglePsiRegion('national')">National - {{ psi }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('west')">West - {{ psiwest }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
 					<img class="pulse-hand" alt="click here pointer hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
@@ -1223,7 +1223,7 @@
 				<div style="font-size: 2em">PSI<span class="refreshicon" style="cursor: pointer" @click="refresh">&nbsp; &#10227;&#xFE0E;</span></div>
 				<div class="psi-number"><span><a @click="toggleToPm25" style="cursor: pointer;">&nbsp;</a></span>{{ psiwest }}<span>&nbsp;</span></div>
 				<div class="index-text">West</div>
-				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('national')">National - {{ psi }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
+				<div class="index-text"><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('north')">North - {{ psinorth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('south')">South - {{ psisouth }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('east')">East - {{ psieast }}</span><span class="region-tag" style="cursor: pointer; display: none;" @click="togglePsiRegion('national')">National - {{ psi }}</span><span class="region-tag" style="cursor: pointer;" @click="togglePsiRegion('central')">Central - {{ psicentral }}</span></div>
 				<div class="pulse-group">
 					<div class="pulse-circle"></div>
 					<img class="pulse-hand" alt="click here pointer hand" src="https://i.ibb.co/KWQPtVJ/double-tap-60px.png" />
@@ -1405,6 +1405,8 @@
 							const items = data.items[0];
 							//console.log("psi items", items)
 							this.psitime = this.getLocaleTimestamp(items.update_timestamp)
+							//console.log("psi items.update_timestamp", items.update_timestamp)
+							//console.log("this.psitime", this.psitime)
 							this.psi = items.readings.psi_twenty_four_hourly.national;
 							console.log("this.psi", this.psi)
 							this.psicentral = items.readings.psi_twenty_four_hourly.central;
@@ -1424,7 +1426,8 @@
 							const items = data.items[0];
 							//console.log("pm25 items", items)
 							this.pm25time = this.getLocaleTimestamp(items.update_timestamp)
-							console.log("this.pm25time", this.pm25time)
+							//console.log("pm25 items.update_timestamp", items.update_timestamp)
+							//console.log("this.pm25time", this.pm25time)
 							this.pm25 = items.readings.pm25_one_hourly.central
 							console.log("this.pm25", this.pm25)
 							this.pm25north = items.readings.pm25_one_hourly.north
@@ -1595,7 +1598,7 @@
 							// if first time visiting which means localStorage is null, then show Central as default
 							this.changePm25BackgroundColor(this.pm25);
 						}
-					}, 800); // delay has to be >=500 otherwise bg of body will be wrong
+					}, 800); // delay has to be >500, ~800 otherwise bg of body will be wrong
 				},
 				toggleToPsi() {
 					this.showSlide = true;
@@ -1960,7 +1963,7 @@
 						this.changePsiBackgroundColor(this.psi)
 					} else {
 						// if first time visiting, then show National as default
-						this.preferPsiNorth = false;
+						/*this.preferPsiNorth = false;
 						this.preferPsiSouth = false;
 						this.preferPsiEast = false;
 						this.preferPsiWest = false;
@@ -1969,7 +1972,17 @@
 						localStorage.removeItem('psiRegionPreference');
 						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
 						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
-						this.changePsiBackgroundColor(this.psi)
+						this.changePsiBackgroundColor(this.psi) */
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = false;
+						this.preferPsiCentral = true;
+						this.preferPsiNational = false;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psicentral)
 					}
 				},
 			}
