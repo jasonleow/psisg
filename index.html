@@ -991,7 +991,8 @@
 		</div>
 
 		<!-- PREFERENCE SET TO PSI NATIONAL -->
-		<div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiNational" :class="{ 'slide-right': !showSlide }" class="sliding" style="display: none;">
+		<!-- <div v-touch:swipe.right="onSwipeRightItem" v-show="preferPsiNational" :class="{ 'slide-right': !showSlide }" class="sliding" style="display: none !important;"> -->
+		<div v-touch:swipe.right="onSwipeRightItem" :class="{ 'slide-right': !showSlide }" class="sliding" style="display: none !important;">
 			<div v-show="showPSI" class="fade-in-right">
 				<div v-show="psiApiDown || psiNationalDown" class="box" style="margin: -1em auto 3em auto;">
 					<p class="box-header" style="background-color: red;"><strong>🚧 Oops! Sorry, something broke..</strong></p>
@@ -1880,7 +1881,7 @@
 						this.changePsiBackgroundColor(this.psi)
 					} else {
 						// if first time visiting, then show National as default
-						this.preferPsiNorth = false;
+						/*this.preferPsiNorth = false;
 						this.preferPsiSouth = false;
 						this.preferPsiEast = false;
 						this.preferPsiWest = false;
@@ -1889,7 +1890,18 @@
 						localStorage.removeItem('psiRegionPreference');
 						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
 						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
-						this.changePsiBackgroundColor(this.psi)
+						this.changePsiBackgroundColor(this.psi)*/
+						// if first time visiting, then show Central as default
+						this.preferPsiNorth = false;
+						this.preferPsiSouth = false;
+						this.preferPsiEast = false;
+						this.preferPsiWest = false;
+						this.preferPsiCentral = true;
+						this.preferPsiNational = false;
+						localStorage.removeItem('psiRegionPreference');
+						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
+						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
+						this.changePsiBackgroundColor(this.psicentral)
 					}
 				},
 				setPsiRegion() {
@@ -1973,6 +1985,7 @@
 						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
 						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
 						this.changePsiBackgroundColor(this.psi) */
+						// if first time visiting, then show Central as default
 						this.preferPsiNorth = false;
 						this.preferPsiSouth = false;
 						this.preferPsiEast = false;
