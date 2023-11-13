@@ -1558,7 +1558,7 @@
 					else if (value > 250) return '#FFFFFF';
 					else return '#000000';
 				},
-				changePm25BackgroundColor(value) {
+				/*changePm25BackgroundColor(value) {
 					document.body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred', 'grey');
 					if (value === '') {
 						document.body.classList.add('grey');
@@ -1575,8 +1575,27 @@
 					} else {
 						document.body.classList.add('grey');
 					}
+				}, */
+				changePm25BackgroundColor(value) {
+					const body = document.body;
+					body.classList.remove('lightgreen', 'lightblue', 'lightyellow', 'lightred', 'grey');
+					if (value === '') {
+						body.classList.add('grey');
+					} else if (value === " ") {
+						body.classList.add('grey');
+					} else if (value <= 55 && value >= 0) {
+						body.classList.add('lightgreen');
+					} else if (value <= 150) {
+						body.classList.add('lightblue');
+					} else if (value <= 250) {
+						body.classList.add('lightyellow');
+					} else if (value > 250) {
+						body.classList.add('lightred');
+					} else {
+						body.classList.add('grey');
+					}
 				},
-				changePsiBackgroundColor(value) {
+				/*changePsiBackgroundColor(value) {
 					document.body.classList.remove('green', 'blue', 'yellow', 'orange', 'red', 'grey');
 					if (value === '') {
 						document.body.classList.add('grey');
@@ -1594,6 +1613,27 @@
 						document.body.classList.add('red');
 					} else {
 						document.body.classList.add('grey');
+					}
+				},*/
+				changePsiBackgroundColor(value) {
+					const body = document.body;
+					body.classList.remove('green', 'blue', 'yellow', 'orange', 'red', 'grey');
+					if (value === '') {
+						body.classList.add('grey');
+					} else if (value === " ") {
+						body.classList.add('grey');
+					} else if (value <= 50 && value >= 0) {
+						body.classList.add('green');
+					} else if (value <= 100) {
+						body.classList.add('blue');
+					} else if (value <= 200) {
+						body.classList.add('yellow');
+					} else if (value <= 300) {
+						body.classList.add('orange');
+					} else if (value > 300) {
+						body.classList.add('red');
+					} else {
+						body.classList.add('grey');
 					}
 				},
 				initialSetPm25BackgroundColor() {
