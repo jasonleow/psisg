@@ -1429,6 +1429,7 @@
 							this.psisouth = items.readings.psi_twenty_four_hourly.south;
 							this.psieast = items.readings.psi_twenty_four_hourly.east;
 							this.psiwest = items.readings.psi_twenty_four_hourly.west;
+							this.setRegion()
 						})
 						.catch(error => {
 							console.error('Error fetching data:', error);
