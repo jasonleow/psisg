@@ -1923,16 +1923,17 @@
 						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
 						this.changePsiBackgroundColor(this.psiwest)
 					} else if (r == 'national') {
+						// since API changed to no longer show national PSI, will switch national preference to central.
 						this.preferPsiNorth = false;
 						this.preferPsiSouth = false;
 						this.preferPsiEast = false;
 						this.preferPsiWest = false;
-						this.preferPsiCentral = false;
-						this.preferPsiNational = true;
+						this.preferPsiCentral = true;
+						this.preferPsiNational = false;
 						localStorage.removeItem('psiRegionPreference');
-						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
+						localStorage.setItem('psiRegionPreference', JSON.stringify('central'));
 						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
-						this.changePsiBackgroundColor(this.psi)
+						this.changePsiBackgroundColor(this.psicentral)
 					} else {
 						// if first time visiting, then show National as default
 						/*this.preferPsiNorth = false;
@@ -1953,7 +1954,7 @@
 						this.preferPsiCentral = true;
 						this.preferPsiNational = false;
 						localStorage.removeItem('psiRegionPreference');
-						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
+						localStorage.setItem('psiRegionPreference', JSON.stringify('central'));
 						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
 						this.changePsiBackgroundColor(this.psicentral)
 					}
@@ -2017,16 +2018,17 @@
 						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
 						this.changePsiBackgroundColor(this.psiwest)
 					} else if (psiRegionPreference == 'national') {
+						// since API changed to no longer show national PSI, will switch national preference to central.
 						this.preferPsiNorth = false;
 						this.preferPsiSouth = false;
 						this.preferPsiEast = false;
 						this.preferPsiWest = false;
-						this.preferPsiCentral = false;
-						this.preferPsiNational = true;
+						this.preferPsiCentral = true;
+						this.preferPsiNational = false;
 						localStorage.removeItem('psiRegionPreference');
-						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
+						localStorage.setItem('psiRegionPreference', JSON.stringify('central'));
 						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
-						this.changePsiBackgroundColor(this.psi)
+						this.changePsiBackgroundColor(this.psicentral)
 					} else {
 						// if first time visiting, then show National as default
 						/*this.preferPsiNorth = false;
@@ -2047,7 +2049,7 @@
 						this.preferPsiCentral = true;
 						this.preferPsiNational = false;
 						localStorage.removeItem('psiRegionPreference');
-						localStorage.setItem('psiRegionPreference', JSON.stringify('national'));
+						localStorage.setItem('psiRegionPreference', JSON.stringify('central'));
 						console.log('localStorage - psiRegionPreference', localStorage.getItem('psiRegionPreference'));
 						this.changePsiBackgroundColor(this.psicentral)
 					}
