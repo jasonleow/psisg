@@ -1416,7 +1416,7 @@
 				},
 				fetchAirQualityData() {
 					// https://api.data.gov.sg/v1/environment/psi
-					fetch('https://api.data.gov.sg/v1/environment/psi')
+					fetch('https://api-open.data.gov.sg/v2/real-time/api/psi')
 						.then(response => response.json())
 						.then(data => {
 							const items = data.items[0];
