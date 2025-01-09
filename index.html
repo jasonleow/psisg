@@ -1417,45 +1417,38 @@
 				fetchAirQualityData() {
 					// https://api.data.gov.sg/v1/environment/psi
 					fetch('https://api-open.data.gov.sg/v2/real-time/api/psi')
-						.then(response => response.json())
-						.then(data => {
-							const items = data.items[0];
-							//console.log("psi items", items)
-							this.psitime = this.getLocaleTimestamp(items.update_timestamp)
-							//console.log("psi items.update_timestamp", items.update_timestamp)
-							//console.log("this.psitime", this.psitime)
-							this.psi = items.readings.psi_twenty_four_hourly.national;
-							console.log("this.psi", this.psi)
-							this.psicentral = items.readings.psi_twenty_four_hourly.central;
-							this.psinorth = items.readings.psi_twenty_four_hourly.north;
-							this.psisouth = items.readings.psi_twenty_four_hourly.south;
-							this.psieast = items.readings.psi_twenty_four_hourly.east;
-							this.psiwest = items.readings.psi_twenty_four_hourly.west;
-						})
-						.catch(error => {
-							console.error('Error fetching data:', error);
-							this.psiApiDown = true;
-						});
+				            .then(response => response.json())
+				            .then(data => {
+				              const items = data.data.items[0];
+				              this.psitime = this.getLocaleTimestamp(items.updatedTimestamp);
+				              this.psi = items.readings.psi_twenty_four_hourly.central;
+				              this.psicentral = items.readings.psi_twenty_four_hourly.central;
+				              this.psinorth = items.readings.psi_twenty_four_hourly.north;
+				              this.psisouth = items.readings.psi_twenty_four_hourly.south;
+				              this.psieast = items.readings.psi_twenty_four_hourly.east;
+				              this.psiwest = items.readings.psi_twenty_four_hourly.west;
+				            })
+				            .catch(error => {
+				              console.error('Error fetching data:', error);
+				              this.psiApiDown = true;
+				            });
+				
 					// https://api.data.gov.sg/v1/environment/pm25
-					fetch('https://api.data.gov.sg/v1/environment/pm25')
-						.then(response => response.json())
-						.then(data => {
-							const items = data.items[0];
-							//console.log("pm25 items", items)
-							this.pm25time = this.getLocaleTimestamp(items.update_timestamp)
-							//console.log("pm25 items.update_timestamp", items.update_timestamp)
-							//console.log("this.pm25time", this.pm25time)
-							this.pm25 = items.readings.pm25_one_hourly.central
-							console.log("this.pm25", this.pm25)
-							this.pm25north = items.readings.pm25_one_hourly.north
-							this.pm25south = items.readings.pm25_one_hourly.south
-							this.pm25east = items.readings.pm25_one_hourly.east
-							this.pm25west = items.readings.pm25_one_hourly.west
-						})
-						.catch(error => {
-							console.error('Error fetching data:', error);
-							this.pm25ApiDown = true;
-						});
+					fetch('https://api-open.data.gov.sg/v2/real-time/api/pm25')
+				            .then(response => response.json())
+				            .then(data => {
+				              const items = data.data.items[0];
+				              this.pm25time = this.getLocaleTimestamp(items.updatedTimestamp);
+				              this.pm25 = items.readings.pm25_one_hourly.central;
+				              this.pm25north = items.readings.pm25_one_hourly.north;
+				              this.pm25south = items.readings.pm25_one_hourly.south;
+				              this.pm25east = items.readings.pm25_one_hourly.east;
+				              this.pm25west = items.readings.pm25_one_hourly.west;
+				            })
+				            .catch(error => {
+				              console.error('Error fetching data:', error);
+				              this.pm25ApiDown = true;
+				            });
 				},
 				getLocaleTimestamp(t) {
 					const localDate = new Date(t).toLocaleDateString("en-SG", {
